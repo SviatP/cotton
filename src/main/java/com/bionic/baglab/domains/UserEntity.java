@@ -19,7 +19,7 @@ public class UserEntity {
     private String email;
     private String firstname;
     private String lastname;
-    private Integer roleId;
+    private UserRole role;
     private Integer statusId;
     private Timestamp userCreate;
     private Timestamp userUpdate;
@@ -40,7 +40,7 @@ public class UserEntity {
     private Collection<ModelEntity> modelsByIdUser;
     private Collection<OrderEntity> ordersByIdUser;
     private Collection<ShippingAdressEntity> shippingAdressesByIdUser;
-    private RoleEntity roleByRoleId;
+    private UserRoles roleByRoleId;
     private UserStatusEntity userStatusByStatusId;*/
 
     @Id
@@ -103,14 +103,14 @@ public class UserEntity {
         this.lastname = lastname;
     }
 
-    @Basic
-    @Column(name = "roleId")
-    public Integer getRoleId() {
-        return roleId;
+    @OneToOne
+    @JoinColumn(name = "roleId")
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     @Basic
@@ -156,7 +156,7 @@ public class UserEntity {
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-        if (roleId != null ? !roleId.equals(that.roleId) : that.roleId != null) return false;
+        if (role != null ? !role.equals(that.role) : that.role != null) return false;
         if (statusId != null ? !statusId.equals(that.statusId) : that.statusId != null) return false;
         if (userCreate != null ? !userCreate.equals(that.userCreate) : that.userCreate != null) return false;
         if (userUpdate != null ? !userUpdate.equals(that.userUpdate) : that.userUpdate != null) return false;
@@ -172,7 +172,7 @@ public class UserEntity {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (statusId != null ? statusId.hashCode() : 0);
         result = 31 * result + (userCreate != null ? userCreate.hashCode() : 0);
         result = 31 * result + (userUpdate != null ? userUpdate.hashCode() : 0);
@@ -228,11 +228,11 @@ public class UserEntity {
 
     @ManyToOne
     @JoinColumn(name = "roleId", referencedColumnName = "idRole")
-    public RoleEntity getRoleByRoleId() {
+    public UserRoles getRoleByRoleId() {
         return roleByRoleId;
     }
 
-    public void setRoleByRoleId(RoleEntity roleByRoleId) {
+    public void setRoleByRoleId(UserRoles roleByRoleId) {
         this.roleByRoleId = roleByRoleId;
     }
 
