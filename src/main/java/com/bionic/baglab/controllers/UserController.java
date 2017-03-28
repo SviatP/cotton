@@ -3,6 +3,8 @@ package com.bionic.baglab.controllers;
 
 import com.bionic.baglab.dao.UserDao;
 import com.bionic.baglab.domains.UserEntity;
+import com.bionic.baglab.dto.user.UserDto;
+import com.bionic.baglab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ public class UserController {
 
   @Autowired
   private UserDao userDao;
+  @Autowired
+  private UserService userService;
 
   /**
    * /create  --> Create a new user and save it in the database.
@@ -34,7 +38,7 @@ public class UserController {
   @RequestMapping("/create")
   @ResponseBody
   public String create(String email, String name) {
-    UserEntity user = null;
+    UserEntity user;
     try {
       user = new UserEntity(email, name);
       userDao.save(user);
@@ -116,16 +120,16 @@ public class UserController {
    */
   @RequestMapping("/users")
   @ResponseBody
-  public Set<UserEntity> getUsers() {
-    HashSet<UserEntity> userSet = null;
+  public List<UserDto> getUsers() { //todo: logging
+    /*HashSet<UserEntity> userSet = null;
     try {
       userSet = new HashSet<UserEntity>((List<UserEntity>) userDao.findAll()) ;
     }
     catch (Exception ex) {
-      System.out.println("error, no users found: " + ex); //todo: logging
-    }
-    return userSet;
+      System.out.println("error, no users found: " + ex);
+    }*/
+    return userService.getAllUsers();
   }
 
-
+//todo: rewrite with dto/services
 }

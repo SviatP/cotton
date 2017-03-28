@@ -3,15 +3,11 @@ package com.bionic.baglab.domains;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created by username on 11.03.2017.
- */
-
 @Entity
 @Table(name = "user", schema = "baglab")
 public class UserEntity {
 
-    public final static String user = "Admin";
+    public final static String user = "Admin";  // ??? del
 
     private int idUser;
     private String login;
@@ -159,9 +155,7 @@ public class UserEntity {
         if (role != null ? !role.equals(that.role) : that.role != null) return false;
         if (statusId != null ? !statusId.equals(that.statusId) : that.statusId != null) return false;
         if (userCreate != null ? !userCreate.equals(that.userCreate) : that.userCreate != null) return false;
-        if (userUpdate != null ? !userUpdate.equals(that.userUpdate) : that.userUpdate != null) return false;
-
-        return true;
+        return userUpdate != null ? userUpdate.equals(that.userUpdate) : that.userUpdate == null;
     }
 
     @Override

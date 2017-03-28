@@ -9,7 +9,7 @@ import java.util.Collection;
 public class PagesTypeEntity {
     private int idpagesType;
     private String type;
-    private Collection<PagesEntity> pagesEntityByIdpagesType;
+    //private Collection<PagesEntity> pagesEntityByIdpagesType;
 
     @Id
     @Column(name = "idpages_type")
@@ -39,9 +39,7 @@ public class PagesTypeEntity {
         PagesTypeEntity that = (PagesTypeEntity) o;
 
         if (idpagesType != that.idpagesType) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-
-        return true;
+        return type != null ? type.equals(that.type) : that.type == null;
     }
 
     @Override

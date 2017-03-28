@@ -14,7 +14,7 @@ public class PagesEntity {
     private String header;
     private Timestamp newsCreate;
     private Timestamp newsUpdate;
-    private PagesTypeEntity pagesTypeByPagesTypeId;
+    private PagesTypeEntity pagesType;
 
     @Id
     @GeneratedValue(generator="increment")
@@ -96,15 +96,15 @@ public class PagesEntity {
         return result;
     }
 
-   /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "pagesTypeId", referencedColumnName = "idpages_type", nullable = false)
-    public PagesTypeEntity getPagesTypeByPagesTypeId() {
-        return pagesTypeByPagesTypeId;
+    public PagesTypeEntity getPagesType() {
+        return pagesType;
     }
 
-    public void setPagesTypeByPagesTypeId(PagesTypeEntity pagesTypeByPagesTypeId) {
-        this.pagesTypeByPagesTypeId = pagesTypeByPagesTypeId;
-    }*/
+    public void setPagesType(PagesTypeEntity pagesType) {
+        this.pagesType = pagesType;
+    }
 
     @Override
     public String toString() {
@@ -114,7 +114,7 @@ public class PagesEntity {
                 ", header='" + header + '\'' +
                 ", newsCreate=" + newsCreate +
                 ", newsUpdate="  + newsUpdate +
-                ", pagesTypeByPagesTypeId=" + pagesTypeByPagesTypeId +
+                ", pagesType=" + pagesType +
                 '}';
     }
 }
