@@ -26,6 +26,7 @@ public class UserEntity {
     private Timestamp userUpdate;
     private byte deleted;
     private Collection<OrderEntity> orders;
+    private Collection<ModelEntity> models;
     public UserEntity() {
     }
 
@@ -110,6 +111,24 @@ public class UserEntity {
         return role;
     }
 
+    @OneToMany(mappedBy = "user")
+    public Collection<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<ModelEntity> getModels() {
+        return models;
+    }
+
+    public void setModels(Collection<ModelEntity> models) {
+        this.models = models;
+    }
+
     public void setRole(UserRole role) {
         this.role = role;
     }
@@ -143,6 +162,22 @@ public class UserEntity {
     public void setUserUpdate(Timestamp userUpdate) {
         this.userUpdate = userUpdate;
     }
+
+
+    @Basic
+    @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
+    //@Type(type = "org.hibernate.type.BigIntegerType") org.hibernate.type.descr
+    public byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(byte deleted) {
+        this.deleted = deleted;
+    }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -180,70 +215,4 @@ public class UserEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
-    //@Type(type = "org.hibernate.type.BigIntegerType") org.hibernate.type.descr
-    public byte getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(byte deleted) {
-        this.deleted = deleted;
-    }
-/*
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<FeedbackEntity> getFeedbacksByIdUser() {
-        return feedbacksByIdUser;
-    }
-
-    public void setFeedbacksByIdUser(Collection<FeedbackEntity> feedbacksByIdUser) {
-        this.feedbacksByIdUser = feedbacksByIdUser;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<ModelEntity> getModelsByIdUser() {
-        return modelsByIdUser;
-    }
-
-    public void setModelsByIdUser(Collection<ModelEntity> modelsByIdUser) {
-        this.modelsByIdUser = modelsByIdUser;
-    }
-*/
-    @OneToMany(mappedBy = "user")
-    public Collection<OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Collection<OrderEntity> orders) {
-        this.orders = orders;
-    }
-/*
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<ShippingAdressEntity> getShippingAdressesByIdUser() {
-        return shippingAdressesByIdUser;
-    }
-
-    public void setShippingAdressesByIdUser(Collection<ShippingAdressEntity> shippingAdressesByIdUser) {
-        this.shippingAdressesByIdUser = shippingAdressesByIdUser;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "roleId", referencedColumnName = "idRole")
-    public UserRoles getRoleByRoleId() {
-        return roleByRoleId;
-    }
-
-    public void setRoleByRoleId(UserRoles roleByRoleId) {
-        this.roleByRoleId = roleByRoleId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "statusId", referencedColumnName = "idstatus")
-    public UserStatusEntity getUserStatusByStatusId() {
-        return userStatusByStatusId;
-    }
-
-    public void setUserStatusByStatusId(UserStatusEntity userStatusByStatusId) {
-        this.userStatusByStatusId = userStatusByStatusId;
-    } */
 }

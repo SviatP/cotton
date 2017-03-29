@@ -2,21 +2,23 @@ package com.bionic.baglab.domains;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  * Created by potaychuk on 28.03.2017.
  */
 @Entity
-@Table(name = "order", schema = "baglab")
+@Table(name = "[order]", schema = "baglab")
 public class OrderEntity {
     private int idOrder;
     private UserEntity user;
-    private int orderStatusId;
+    private OrderStatusEntity orderStatus;
     private Timestamp orderCreate;
     private Timestamp orderUpdate;
+    private Collection<ModelEntity> models;
 
     @Id
-    @Column(name = "idOrder")
+    @Column(name = "[idOrder]")
     public int getIdOrder() {
         return idOrder;
     }
@@ -26,7 +28,7 @@ public class OrderEntity {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "[userId]")
     public UserEntity getUser() {
         return this.user;
     }
@@ -35,16 +37,17 @@ public class OrderEntity {
         this.user = user;
     }
 
-    @Column(name = "orderStatusId")
-    public int getOrderStatusId() {
-        return orderStatusId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "[orderStatusId]")
+    public OrderStatusEntity getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrderStatusId(int orderStatusId) {
-        this.orderStatusId = orderStatusId;
+    public void setOrderStatus(OrderStatusEntity orderStatusId) {
+        this.orderStatus = orderStatusId;
     }
 
-    @Column(name = "orderCreate")
+    @Column(name = "[orderCreate]")
     public Timestamp getOrderCreate() {
         return orderCreate;
     }
@@ -53,13 +56,22 @@ public class OrderEntity {
         this.orderCreate = orderCreate;
     }
 
-    @Column(name = "orderUpdate")
+    @Column(name = "[orderUpdate]")
     public Timestamp getOrderUpdate() {
         return orderUpdate;
     }
 
     public void setOrderUpdate(Timestamp orderUpdate) {
         this.orderUpdate = orderUpdate;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+    public Collection<ModelEntity> getModels() {
+        return models;
+    }
+
+    public void setModels(Collection<ModelEntity> models) {
+        this.models = models;
     }
 
     @Override
@@ -70,18 +82,16 @@ public class OrderEntity {
         OrderEntity that = (OrderEntity) o;
 
         if (idOrder != that.idOrder) return false;
-        if (user != that.user) return false;
-        if (orderStatusId != that.orderStatusId) return false;
+//        if (orderStatus != null ? !orderStatus.equals(that.orderStatus) : that.orderStatus != null) return false;
         if (orderCreate != null ? !orderCreate.equals(that.orderCreate) : that.orderCreate != null) return false;
-        if (orderUpdate != null ? !orderUpdate.equals(that.orderUpdate) : that.orderUpdate != null) return false;
+        return orderUpdate != null ? orderUpdate.equals(that.orderUpdate) : that.orderUpdate == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result = idOrder;
-        result = 31 * result + orderStatusId;
+//        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
         result = 31 * result + (orderCreate != null ? orderCreate.hashCode() : 0);
         result = 31 * result + (orderUpdate != null ? orderUpdate.hashCode() : 0);
         return result;

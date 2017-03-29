@@ -1,30 +1,34 @@
 package com.bionic.baglab.domains;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by potaychuk on 28.03.2017.
  */
 @Entity
 @Table(name = "orderstatus", schema = "baglab")
-public class OrderstatusEntity {
-    private int idorderStatus;
+public class OrderStatusEntity {
+    private int idOrderStatus;
     private String code;
     private String description;
-//    private int deleted;
+    private Collection<OrderEntity> orders;
+
+
+    //    private int deleted;
 
     @Id
-    @Column(name = "idorder_status")
-    public int getIdorderStatus() {
-        return idorderStatus;
+    @Column(name = "`idorder_status`")
+    public int getIdOrderStatus() {
+        return idOrderStatus;
     }
 
-    public void setIdorderStatus(int idorderStatus) {
-        this.idorderStatus = idorderStatus;
+    public void setIdOrderStatus(int idOrderStatus) {
+        this.idOrderStatus = idOrderStatus;
     }
 
-    @Basic
-    @Column(name = "code")
+
+    @Column(name = "`code`")
     public String getCode() {
         return code;
     }
@@ -33,8 +37,7 @@ public class OrderstatusEntity {
         this.code = code;
     }
 
-    @Basic
-    @Column(name = "description", columnDefinition="MEDIUMTEXT")
+    @Column(name = "`description`", columnDefinition = "MEDIUMTEXT")
     public String getDescription() {
         return description;
     }
@@ -52,15 +55,23 @@ public class OrderstatusEntity {
 //    public void setDeleted(int deleted) {
 //        this.deleted = deleted;
 //    }
+    @OneToMany(mappedBy = "orderStatus")
+    public Collection<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<OrderEntity> orders) {
+        this.orders = orders;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderstatusEntity that = (OrderstatusEntity) o;
+        OrderStatusEntity that = (OrderStatusEntity) o;
 
-        if (idorderStatus != that.idorderStatus) return false;
+        if (idOrderStatus != that.idOrderStatus) return false;
 //        if (deleted != that.deleted) return false;
         if (code != null ? !code.equals(that.code) : that.code != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
@@ -70,7 +81,7 @@ public class OrderstatusEntity {
 
     @Override
     public int hashCode() {
-        int result = idorderStatus;
+        int result = idOrderStatus;
         result = 31 * result + (code != null ? code.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
 //        result = 31 * result + (int) deleted;

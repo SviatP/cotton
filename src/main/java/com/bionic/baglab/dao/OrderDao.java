@@ -10,6 +10,7 @@ import java.util.List;
  * Created by potaychuk on 28.03.2017.
  */
 @Transactional
-public interface OrderDao extends CrudRepository {
-    public List<OrderEntity> findAll();
+public interface OrderDao extends CrudRepository<OrderEntity, Long> {
+    List<OrderEntity> findAll();
+
 }
