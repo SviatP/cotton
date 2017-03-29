@@ -2,6 +2,7 @@ package com.bionic.baglab.domains;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "baglab")
@@ -32,9 +33,10 @@ public class UserEntity {
         this.email = email;
         this.lastname = lastname;
     }
+    private Collection<OrderEntity> ordersByIdUser;
     /* private Collection<FeedbackEntity> feedbacksByIdUser;
     private Collection<ModelEntity> modelsByIdUser;
-    private Collection<OrderEntity> ordersByIdUser;
+
     private Collection<ShippingAdressEntity> shippingAdressesByIdUser;
     private UserRoles roleByRoleId;
     private UserStatusEntity userStatusByStatusId;*/
@@ -183,6 +185,15 @@ public class UserEntity {
     public void setDeleted(byte deleted) {
         this.deleted = deleted;
     }
+
+  /*  @OneToMany(mappedBy = "userByUserId")
+    public Collection<OrderEntity> getOrdersByIdUser() {
+        return ordersByIdUser;
+    }*/
+
+    public void setOrdersByIdUser(Collection<OrderEntity> ordersByIdUser) {
+        this.ordersByIdUser = ordersByIdUser;
+    }
 /*
     @OneToMany(mappedBy = "userByUserId")
     public Collection<FeedbackEntity> getFeedbacksByIdUser() {
@@ -202,14 +213,7 @@ public class UserEntity {
         this.modelsByIdUser = modelsByIdUser;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<OrderEntity> getOrdersByIdUser() {
-        return ordersByIdUser;
-    }
 
-    public void setOrdersByIdUser(Collection<OrderEntity> ordersByIdUser) {
-        this.ordersByIdUser = ordersByIdUser;
-    }
 
     @OneToMany(mappedBy = "userByUserId")
     public Collection<ShippingAdressEntity> getShippingAdressesByIdUser() {

@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  */
 public class UserDto {
     private int idUser;
-    private String login;
+    private String login; //exclude?
     private String email;
     private String firstname;
     private String lastname;

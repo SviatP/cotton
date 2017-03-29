@@ -121,13 +121,6 @@ public class UserController {
   @RequestMapping("/users")
   @ResponseBody
   public List<UserDto> getUsers() { //todo: logging
-    /*HashSet<UserEntity> userSet = null;
-    try {
-      userSet = new HashSet<UserEntity>((List<UserEntity>) userDao.findAll()) ;
-    }
-    catch (Exception ex) {
-      System.out.println("error, no users found: " + ex);
-    }*/
     return userService.getAllUsers();
   }
 
