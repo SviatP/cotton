@@ -2,6 +2,7 @@ package com.bionic.baglab.domains;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 /**
  * Created by username on 11.03.2017.
@@ -24,7 +25,7 @@ public class UserEntity {
     private Timestamp userCreate;
     private Timestamp userUpdate;
     private byte deleted;
-
+    private Collection<OrderEntity> orders;
     public UserEntity() {
     }
 
@@ -207,16 +208,16 @@ public class UserEntity {
     public void setModelsByIdUser(Collection<ModelEntity> modelsByIdUser) {
         this.modelsByIdUser = modelsByIdUser;
     }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<OrderEntity> getOrdersByIdUser() {
-        return ordersByIdUser;
+*/
+    @OneToMany(mappedBy = "user")
+    public Collection<OrderEntity> getOrders() {
+        return orders;
     }
 
-    public void setOrdersByIdUser(Collection<OrderEntity> ordersByIdUser) {
-        this.ordersByIdUser = ordersByIdUser;
+    public void setOrders(Collection<OrderEntity> orders) {
+        this.orders = orders;
     }
-
+/*
     @OneToMany(mappedBy = "userByUserId")
     public Collection<ShippingAdressEntity> getShippingAdressesByIdUser() {
         return shippingAdressesByIdUser;
