@@ -4,11 +4,15 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
+/**
+ * Created by username on 11.03.2017.
+ */
+
 @Entity
 @Table(name = "user", schema = "baglab")
 public class UserEntity {
 
-    public final static String user = "Admin";  // ??? del
+    public final static String user = "Admin";
 
     private int idUser;
     private String login;
@@ -21,7 +25,8 @@ public class UserEntity {
     private Timestamp userCreate;
     private Timestamp userUpdate;
     private byte deleted;
-
+    private Collection<OrderEntity> orders;
+    private Collection<ModelEntity> models;
     public UserEntity() {
     }
 
@@ -33,10 +38,9 @@ public class UserEntity {
         this.email = email;
         this.lastname = lastname;
     }
-    private Collection<OrderEntity> ordersByIdUser;
     /* private Collection<FeedbackEntity> feedbacksByIdUser;
     private Collection<ModelEntity> modelsByIdUser;
-
+    private Collection<OrderEntity> ordersByIdUser;
     private Collection<ShippingAdressEntity> shippingAdressesByIdUser;
     private UserRoles roleByRoleId;
     private UserStatusEntity userStatusByStatusId;*/
@@ -107,6 +111,24 @@ public class UserEntity {
         return role;
     }
 
+    @OneToMany(mappedBy = "user")
+    public Collection<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Collection<ModelEntity> getModels() {
+        return models;
+    }
+
+    public void setModels(Collection<ModelEntity> models) {
+        this.models = models;
+    }
+
     public void setRole(UserRole role) {
         this.role = role;
     }
@@ -141,6 +163,22 @@ public class UserEntity {
         this.userUpdate = userUpdate;
     }
 
+
+    @Basic
+    @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
+    //@Type(type = "org.hibernate.type.BigIntegerType") org.hibernate.type.descr
+    public byte getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(byte deleted) {
+        this.deleted = deleted;
+    }
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -157,7 +195,9 @@ public class UserEntity {
         if (role != null ? !role.equals(that.role) : that.role != null) return false;
         if (statusId != null ? !statusId.equals(that.statusId) : that.statusId != null) return false;
         if (userCreate != null ? !userCreate.equals(that.userCreate) : that.userCreate != null) return false;
-        return userUpdate != null ? userUpdate.equals(that.userUpdate) : that.userUpdate == null;
+        if (userUpdate != null ? !userUpdate.equals(that.userUpdate) : that.userUpdate != null) return false;
+
+        return true;
     }
 
     @Override
@@ -175,72 +215,4 @@ public class UserEntity {
         return result;
     }
 
-    @Basic
-    @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
-    //@Type(type = "org.hibernate.type.BigIntegerType") org.hibernate.type.descr
-    public byte getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(byte deleted) {
-        this.deleted = deleted;
-    }
-
-  /*  @OneToMany(mappedBy = "userByUserId")
-    public Collection<OrderEntity> getOrdersByIdUser() {
-        return ordersByIdUser;
-    }*/
-
-    public void setOrdersByIdUser(Collection<OrderEntity> ordersByIdUser) {
-        this.ordersByIdUser = ordersByIdUser;
-    }
-/*
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<FeedbackEntity> getFeedbacksByIdUser() {
-        return feedbacksByIdUser;
-    }
-
-    public void setFeedbacksByIdUser(Collection<FeedbackEntity> feedbacksByIdUser) {
-        this.feedbacksByIdUser = feedbacksByIdUser;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<ModelEntity> getModelsByIdUser() {
-        return modelsByIdUser;
-    }
-
-    public void setModelsByIdUser(Collection<ModelEntity> modelsByIdUser) {
-        this.modelsByIdUser = modelsByIdUser;
-    }
-
-
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<ShippingAdressEntity> getShippingAdressesByIdUser() {
-        return shippingAdressesByIdUser;
-    }
-
-    public void setShippingAdressesByIdUser(Collection<ShippingAdressEntity> shippingAdressesByIdUser) {
-        this.shippingAdressesByIdUser = shippingAdressesByIdUser;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "roleId", referencedColumnName = "idRole")
-    public UserRoles getRoleByRoleId() {
-        return roleByRoleId;
-    }
-
-    public void setRoleByRoleId(UserRoles roleByRoleId) {
-        this.roleByRoleId = roleByRoleId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "statusId", referencedColumnName = "idstatus")
-    public UserStatusEntity getUserStatusByStatusId() {
-        return userStatusByStatusId;
-    }
-
-    public void setUserStatusByStatusId(UserStatusEntity userStatusByStatusId) {
-        this.userStatusByStatusId = userStatusByStatusId;
-    } */
 }
