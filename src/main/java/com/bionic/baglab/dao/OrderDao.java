@@ -12,5 +12,7 @@ import java.util.List;
 @Transactional
 public interface OrderDao extends CrudRepository<OrderEntity, Long> {
     List<OrderEntity> findAll();
+    OrderEntity findOne(Long id);
+    OrderEntity save(OrderEntity orderEntity);
 
 }
