@@ -46,15 +46,7 @@ public class OrderStatusEntity {
         this.description = description;
     }
 
-//    @Basic
-//    @Column(name = "deleted")
-//    public int getDeleted() {
-//        return deleted;
-//    }
-//
-//    public void setDeleted(int deleted) {
-//        this.deleted = deleted;
-//    }
+
     @OneToMany(mappedBy = "orderStatus")
     public Collection<OrderEntity> getOrders() {
         return orders;
