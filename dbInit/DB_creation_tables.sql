@@ -17,6 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema baglab
 -- -----------------------------------------------------
+Drop SCHEMA baglab;
 CREATE SCHEMA IF NOT EXISTS `baglab` DEFAULT CHARACTER SET utf8 ;
 USE `baglab` ;
 
