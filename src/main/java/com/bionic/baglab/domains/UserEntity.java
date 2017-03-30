@@ -30,7 +30,7 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(int id) {
+    public UserEntity(long id) {
         this.idUser = id;
     }
 

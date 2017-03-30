@@ -54,7 +54,7 @@ public class UserController {
    */
   @RequestMapping("/delete")
   @ResponseBody
-  public String delete(int id) {
+  public String delete(long id) {
     try {
       UserEntity user = new UserEntity(id);
       userDao.delete(user);
@@ -96,7 +96,7 @@ public class UserController {
    */
   @RequestMapping("/update")
   @ResponseBody
-  public String updateUser(int id, String email, String name) {
+  public String updateUser(long id, String email, String name) {
     try {
       UserEntity user = userDao.findOne(id);
       System.out.println("lastname------" + name);

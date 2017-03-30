@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
  * possible create new query methods working only by defining their signature!
  */
 @Transactional
-public interface UserDao extends CrudRepository<UserEntity, Integer> {
+public interface UserDao extends CrudRepository<UserEntity, Long> {
 
     /**
      * Return the user having the passed email or null if no user is found.
