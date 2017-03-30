@@ -24,6 +24,8 @@ insert into baglab.user  (login,password,email, firstname, lastname, roleId) val
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Peter','peterthebest','peter86@mail.ru','Petruchio','Petrov', 3);
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Finn','demopass','finnthehuman@gmail.com', 'John','Doe2',4);
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Karla','pass','turk@gmail.com', 'John','Doe3',2);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('manager','passm','lao@', 'Lao','Dzi',4);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('manager2','passm','lao@2', 'Lao2','Dzi2',4);
 
 insert into baglab.order (userId, orderStatusId) VALUES (1,1);
 insert into baglab.order (userId, orderStatusId) VALUES (1,2);

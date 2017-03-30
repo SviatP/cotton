@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +21,7 @@ public class UserService {
 
     /**
      *
-     * @return   List<UserLightDto> - all users without password
+     * @return   List<UserDto> - all users. DTO didn't contain passwords
      */
 
     public List<UserDto> getAllUsers(){
@@ -39,5 +40,32 @@ public class UserService {
     }
 
 
+    /**
+     *
+     * @param role - user role from connected table
+     * @return Set of all users, specified by 'role'
+     */
+    public Set<UserDto> getAllUsersByRole(String role) {
+        List<UserEntity> userEntities = null;
+        Set<UserDto> userDtos;
+        try {
+            userEntities = (List<UserEntity>) userDao.findAllByRoleName(role);
+        }
+        catch (Exception ex) {
+            System.out.println("error, no users found. role: " + role+ " ex:" + ex); //todo: logging
+        }
+        return this.getDtofromEntity(userEntities);
+    }
 
+    /**
+     * transform Enteties set to DTO set
+     * @param userEntities
+     * @return Set<UserDto>
+     */
+    private Set<UserDto> getDtofromEntity(List<UserEntity> userEntities){
+        Set<UserDto> userDtos = userEntities.stream()        //make list of userDto from userEntity list
+                .map(userEntity -> new UserDto(userEntity))
+                .collect(Collectors.toSet());
+        return userDtos;
+    }
 }

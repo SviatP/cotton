@@ -23,7 +23,6 @@ public interface UserDao extends CrudRepository<UserEntity, Integer> {
     public UserEntity findByEmail(String email);
 
     public UserEntity findByLogin(String login);
+
+    public UserEntity findAllByRoleName(String role);
 }
-/* public String getUser(){
-        return UserEntity.user;
-    }*/
