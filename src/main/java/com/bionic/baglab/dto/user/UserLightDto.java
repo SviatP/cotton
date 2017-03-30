@@ -1,17 +1,17 @@
-package com.bionic.baglab.dto;
+package com.bionic.baglab.dto.user;
 
 import com.bionic.baglab.domains.UserEntity;
 
 /**
  * Created by username on 3/26/17.
  */
-public class UserDto {
+public class UserLightDto {
     private long idUser;
     private String email;
     private String firstname;
     private String lastname;
 
-    public UserDto(UserEntity userEntity) {
+    public UserLightDto(UserEntity userEntity) {
         this.idUser=userEntity.getIdUser();
         this.email=userEntity.getEmail();
         this.firstname=userEntity.getFirstname();
@@ -56,7 +56,7 @@ public class UserDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserDto userDto = (UserDto) o;
+        UserLightDto userDto = (UserLightDto) o;
 
         if (idUser != userDto.idUser) return false;
         if (email != null ? !email.equals(userDto.email) : userDto.email != null) return false;

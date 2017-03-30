@@ -20,7 +20,7 @@ public class UserService {
 
     /**
      *
-     * @return   List<UserDto> - all users without password
+     * @return   List<UserLightDto> - all users without password
      */
 
     public List<UserDto> getAllUsers(){

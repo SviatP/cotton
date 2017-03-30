@@ -1,6 +1,7 @@
 package com.bionic.baglab.dto;
 
 import com.bionic.baglab.domains.OrderEntity;
+import com.bionic.baglab.dto.user.UserLightDto;
 
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class OrderDto {
 
-    private UserDto userDto;
+    private UserLightDto userDto;
     private long idOrder;
     private OrderStatusDTO status;
     private Timestamp orderCreate;
@@ -24,7 +25,7 @@ public class OrderDto {
 
     public OrderDto(OrderEntity orderEntity) {
 
-        this.userDto = new UserDto(orderEntity.getUser());
+        this.userDto = new UserLightDto(orderEntity.getUser());
         this.idOrder = orderEntity.getIdOrder();
         this.status = new OrderStatusDTO(orderEntity.getOrderStatus());
         this.orderCreate = orderEntity.getOrderCreate();
@@ -64,11 +65,11 @@ public class OrderDto {
         this.orderCreate = orderCreate;
     }
 
-    public UserDto getUserDto() {
+    public UserLightDto getUserDto() {
         return userDto;
     }
 
-    public void setUserDto(UserDto userDto) {
+    public void setUserDto(UserLightDto userDto) {
         this.userDto = userDto;
     }
 
