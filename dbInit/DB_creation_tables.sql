@@ -26,7 +26,7 @@ USE `baglab` ;
 DROP TABLE IF EXISTS `baglab`.`bag_type` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`bag_type` (
-  `idBagType` INT(11) NOT NULL,
+  `idBagType` BIGINT NOT NULL,
   `script` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`idBagType`))
 ENGINE = InnoDB
@@ -39,10 +39,10 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`material` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`material` (
-  `idmaterial` INT(11) NOT NULL AUTO_INCREMENT,
+  `idmaterial` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `price` DOUBLE NOT NULL,
-  `deleted` TINYINT(1) NOT NULL DEFAULT 0,
+  `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`idmaterial`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -54,10 +54,10 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`role` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`role` (
-  `idRole` INT(11) NOT NULL AUTO_INCREMENT,
+  `idRole` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
-  `deleted` TINYINT(1) NULL DEFAULT 0,
+  `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`idRole`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -69,7 +69,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`user_status` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`user_status` (
-  `idstatus` INT(11) NOT NULL AUTO_INCREMENT,
+  `idstatus` BIGINT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(45) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`idstatus`))
@@ -83,17 +83,17 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`user` (
-  `idUser` INT(11) NOT NULL AUTO_INCREMENT,
+  `idUser` BIGINT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(45) NOT NULL,
   `password` VARCHAR(64) NOT NULL,
   `email` VARCHAR(254) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(45) NOT NULL,
-  `roleId` INT(11) NULL DEFAULT NULL,
-  `statusId` INT(11) NULL DEFAULT '1',
+  `roleId` BIGINT NULL DEFAULT NULL,
+  `statusId` BIGINT NULL DEFAULT '1',
   `userCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted` TINYINT(1) NOT NULL DEFAULT 0,
+  `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`idUser`),
   UNIQUE INDEX `login_UNIQUE` (`login` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
@@ -119,9 +119,9 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`model` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`model` (
-  `idModel` INT(11) NOT NULL AUTO_INCREMENT,
-  `userId` INT(11) NOT NULL,
-  `bagTypeId` INT(11) NOT NULL,
+  `idModel` BIGINT NOT NULL AUTO_INCREMENT,
+  `userId` BIGINT NOT NULL,
+  `bagTypeId` BIGINT NOT NULL,
   `modelCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modelUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idModel`),
@@ -147,10 +147,10 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`orderStatus` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`orderStatus` (
-  `idorder_status` INT(11) NOT NULL AUTO_INCREMENT,
+  `idorder_status` BIGINT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(45) NOT NULL,
   `description` MEDIUMTEXT NULL DEFAULT NULL,
-  `deleted` TINYINT(1) NOT NULL DEFAULT 0,
+  `deleted` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`idorder_status`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -162,9 +162,9 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`order` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`order` (
-  `idOrder` INT(11) NOT NULL AUTO_INCREMENT,
-  `userId` INT(11) NOT NULL,
-  `orderStatusId` INT(11) NOT NULL,
+  `idOrder` BIGINT NOT NULL AUTO_INCREMENT,
+  `userId` BIGINT NOT NULL,
+  `orderStatusId` BIGINT NOT NULL,
   `orderCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `orderUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idOrder`),
@@ -190,8 +190,8 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`models_order` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`models_order` (
-  `modelId` INT(11) NOT NULL AUTO_INCREMENT,
-  `orderId` INT(11) NOT NULL,
+  `modelId` BIGINT NOT NULL AUTO_INCREMENT,
+  `orderId` BIGINT NOT NULL,
   `count` INT(11) NOT NULL,
   `price` INT NOT NULL,
   PRIMARY KEY (`modelId`, `orderId`),
@@ -216,11 +216,11 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`panel` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`panel` (
-  `idPanel` INT(11)  NOT NULL AUTO_INCREMENT,
+  `idPanel` BIGINT  NOT NULL AUTO_INCREMENT,
   `pictureURL` VARCHAR(255) NULL,
   `colourRGB` INT(11) NOT NULL,
-  `bagTypeId` INT(11) NOT NULL,
-  `materialId` INT(11) NOT NULL,
+  `bagTypeId` BIGINT NOT NULL,
+  `materialId` BIGINT NOT NULL,
   PRIMARY KEY (`idPanel`, `bagTypeId`),
   INDEX `fk_panel_bag_type1_idx` (`bagTypeId` ASC),
   INDEX `fk_panel_material1_idx` (`materialId` ASC),
@@ -244,7 +244,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`country` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`country` (
-  `idcountry` INT NOT NULL AUTO_INCREMENT,
+  `idcountry` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`idcountry`))
 ENGINE = InnoDB;
@@ -256,7 +256,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `baglab`.`shipping_adress` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`shipping_adress` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `contactName` VARCHAR(45) NOT NULL,
   `street` VARCHAR(45) NOT NULL,
   `apartment` VARCHAR(45) NULL DEFAULT NULL,
@@ -264,8 +264,8 @@ CREATE TABLE IF NOT EXISTS `baglab`.`shipping_adress` (
   `city` VARCHAR(45) NOT NULL,
   `zipcode` VARCHAR(45) NULL DEFAULT NULL,
   `mobile` VARCHAR(45) NULL DEFAULT NULL,
-  `userId` INT(11) NOT NULL,
-  `countryId` INT NOT NULL,
+  `userId` BIGINT NOT NULL,
+  `countryId` BIGINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_shipping_adress_user1_idx` (`userId` ASC),
   INDEX `fk_shipping_adress_country1_idx` (`countryId` ASC),
@@ -290,7 +290,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`pages_type` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`pages_type` (
-  `idpages_type` INT  NOT NULL AUTO_INCREMENT,
+  `idpages_type` BIGINT  NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idpages_type`))
 ENGINE = InnoDB;
@@ -302,12 +302,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `baglab`.`pages` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`pages` (
-  `idnews` INT NOT NULL AUTO_INCREMENT,
+  `idnews` BIGINT NOT NULL AUTO_INCREMENT,
   `body` MEDIUMTEXT NULL,
   `header` VARCHAR(45) NULL,
   `newsCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `newsUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `pagesTypeId` INT NOT NULL,
+  `pagesTypeId` BIGINT NOT NULL,
   PRIMARY KEY (`idnews`),
   INDEX `fk_pages_pages_type1_idx` (`pagesTypeId` ASC),
   CONSTRAINT `fk_pages_pages_type1`
@@ -324,7 +324,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `baglab`.`feedback_status` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`feedback_status` (
-  `idfeedback_status` INT NOT NULL AUTO_INCREMENT,
+  `idfeedback_status` BIGINT NOT NULL AUTO_INCREMENT,
   `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idfeedback_status`))
 ENGINE = InnoDB;
@@ -336,12 +336,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `baglab`.`feedback` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`feedback` (
-  `idfeedback` INT NOT NULL AUTO_INCREMENT,
+  `idfeedback` BIGINT NOT NULL AUTO_INCREMENT,
   `text` MEDIUMTEXT NOT NULL,
-  `userId` INT(11) NOT NULL,
+  `userId` BIGINT NOT NULL,
   `userCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deleted` TINYINT(1) NOT NULL DEFAULT 0,
-  `feedbackStatuIid` INT NOT NULL,
+  `deleted` BOOLEAN NOT NULL DEFAULT FALSE ,
+  `feedbackStatuIid` BIGINT NOT NULL,
   PRIMARY KEY (`idfeedback`),
   INDEX `fk_feedback_user1_idx` (`userId` ASC),
   INDEX `fk_feedback_feedback_status1_idx` (`feedbackStatuIid` ASC),

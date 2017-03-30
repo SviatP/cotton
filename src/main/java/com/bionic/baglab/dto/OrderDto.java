@@ -1,11 +1,8 @@
 package com.bionic.baglab.dto;
 
-import com.bionic.baglab.domains.ModelEntity;
 import com.bionic.baglab.domains.OrderEntity;
-import com.bionic.baglab.domains.UserEntity;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -16,7 +13,7 @@ import java.util.stream.Collectors;
 public class OrderDto {
 
     private UserDto userDto;
-    private int idOrder;
+    private long idOrder;
     private OrderStatusDTO status;
     private Timestamp orderCreate;
     private Collection<ModelDto> models;
@@ -43,11 +40,11 @@ public class OrderDto {
         this.models = models;
     }
 
-    public int getIdOrder() {
+    public long getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(int idOrder) {
+    public void setIdOrder(long idOrder) {
         this.idOrder = idOrder;
     }
 

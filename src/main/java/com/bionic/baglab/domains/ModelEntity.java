@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "[model]", schema = "baglab", catalog = "")
 public class ModelEntity {
-    private int idModel;
+    private long idModel;
     private Timestamp modelCreate;
     private Timestamp modelUpdate;
     private UserEntity user;
@@ -18,11 +18,11 @@ public class ModelEntity {
 
     @Id
     @Column(name = "[idModel]")
-    public int getIdModel() {
+    public long getIdModel() {
         return idModel;
     }
 
-    public void setIdModel(int idModel) {
+    public void setIdModel(long idModel) {
         this.idModel = idModel;
     }
 
@@ -84,9 +84,9 @@ public class ModelEntity {
 
     @Override
     public int hashCode() {
-        int result = idModel;
+        long result = idModel;
         result = 31 * result + (modelCreate != null ? modelCreate.hashCode() : 0);
         result = 31 * result + (modelUpdate != null ? modelUpdate.hashCode() : 0);
-        return result;
+        return (int)result;
     }
 }

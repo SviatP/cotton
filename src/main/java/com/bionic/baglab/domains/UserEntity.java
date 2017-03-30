@@ -14,14 +14,14 @@ public class UserEntity {
 
     public final static String user = "Admin";
 
-    private int idUser;
+    private long idUser;
     private String login;
     private String password;
     private String email;
     private String firstname;
     private String lastname;
     private UserRole role;
-    private Integer statusId;
+    private long statusId;
     private Timestamp userCreate;
     private Timestamp userUpdate;
     private byte deleted;
@@ -47,11 +47,11 @@ public class UserEntity {
 
     @Id
     @Column(name = "idUser")
-    public int getIdUser() {
+    public long getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
 
@@ -135,11 +135,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "statusId")
-    public Integer getStatusId() {
+    public long getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(Integer statusId) {
+    public void setStatusId(long statusId) {
         this.statusId = statusId;
     }
 
@@ -176,9 +176,6 @@ public class UserEntity {
     }
 
 
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -187,32 +184,36 @@ public class UserEntity {
         UserEntity that = (UserEntity) o;
 
         if (idUser != that.idUser) return false;
+        if (statusId != that.statusId) return false;
+        if (deleted != that.deleted) return false;
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
         if (role != null ? !role.equals(that.role) : that.role != null) return false;
-        if (statusId != null ? !statusId.equals(that.statusId) : that.statusId != null) return false;
         if (userCreate != null ? !userCreate.equals(that.userCreate) : that.userCreate != null) return false;
         if (userUpdate != null ? !userUpdate.equals(that.userUpdate) : that.userUpdate != null) return false;
+        if (orders != null ? !orders.equals(that.orders) : that.orders != null) return false;
+        return models != null ? models.equals(that.models) : that.models == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idUser;
+        int result = (int) (idUser ^ (idUser >>> 32));
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (statusId != null ? statusId.hashCode() : 0);
+        result = 31 * result + (int) (statusId ^ (statusId >>> 32));
         result = 31 * result + (userCreate != null ? userCreate.hashCode() : 0);
         result = 31 * result + (userUpdate != null ? userUpdate.hashCode() : 0);
+        result = 31 * result + (int) deleted;
+        result = 31 * result + (orders != null ? orders.hashCode() : 0);
+        result = 31 * result + (models != null ? models.hashCode() : 0);
         return result;
     }
-
 }

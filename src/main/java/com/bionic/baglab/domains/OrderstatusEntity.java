@@ -9,7 +9,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "orderstatus", schema = "baglab")
 public class OrderStatusEntity {
-    private int idOrderStatus;
+    private long idOrderStatus;
     private String code;
     private String description;
     private Collection<OrderEntity> orders;
@@ -19,11 +19,11 @@ public class OrderStatusEntity {
 
     @Id
     @Column(name = "`idorder_status`")
-    public int getIdOrderStatus() {
+    public long getIdOrderStatus() {
         return idOrderStatus;
     }
 
-    public void setIdOrderStatus(int idOrderStatus) {
+    public void setIdOrderStatus(long idOrderStatus) {
         this.idOrderStatus = idOrderStatus;
     }
 
@@ -72,19 +72,18 @@ public class OrderStatusEntity {
         OrderStatusEntity that = (OrderStatusEntity) o;
 
         if (idOrderStatus != that.idOrderStatus) return false;
-//        if (deleted != that.deleted) return false;
         if (code != null ? !code.equals(that.code) : that.code != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        return orders != null ? orders.equals(that.orders) : that.orders == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idOrderStatus;
+        int result = (int) (idOrderStatus ^ (idOrderStatus >>> 32));
         result = 31 * result + (code != null ? code.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-//        result = 31 * result + (int) deleted;
+        result = 31 * result + (orders != null ? orders.hashCode() : 0);
         return result;
     }
 }

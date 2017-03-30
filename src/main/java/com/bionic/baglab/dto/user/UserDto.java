@@ -9,13 +9,13 @@ import java.sql.Timestamp;
  * Contains basic user data, EXCEPT  password
  */
 public class UserDto {
-    private int idUser;
+    private long idUser;
     private String login; //exclude?
     private String email;
     private String firstname;
     private String lastname;
     private UserRole role;
-    private Integer statusId;
+    private long statusId;
     private Timestamp userCreate;
     private Timestamp userUpdate;
     private byte deleted; //default 0 false
@@ -39,12 +39,12 @@ public class UserDto {
     }
 
 
-    public int getIdUser() {
+    public long getIdUser() {
 
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
 
@@ -88,11 +88,11 @@ public class UserDto {
         this.role = role;
     }
 
-    public Integer getStatusId() {
+    public long getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(Integer statusId) {
+    public void setStatusId(long statusId) {
         this.statusId = statusId;
     }
 

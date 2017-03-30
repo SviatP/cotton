@@ -1,23 +1,22 @@
 package com.bionic.baglab.domains;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 
 @Entity
 @Table(name = "pages_type", schema = "baglab")
 public class PagesTypeEntity {
-    private int idpagesType;
+    private long idpagesType;
     private String type;
     //private Collection<PagesEntity> pagesEntityByIdpagesType;
 
     @Id
     @Column(name = "idpages_type")
-    public int getIdpagesType() {
+    public long getIdpagesType() {
         return idpagesType;
     }
 
-    public void setIdpagesType(int idpagesType) {
+    public void setIdpagesType(long idpagesType) {
         this.idpagesType = idpagesType;
     }
 
@@ -44,9 +43,9 @@ public class PagesTypeEntity {
 
     @Override
     public int hashCode() {
-        int result = idpagesType;
+        long result = idpagesType;
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        return result;
+        return (int)result;
     }
 //
 //    @OneToMany(mappedBy = "pagesTypeByPagesTypeId")

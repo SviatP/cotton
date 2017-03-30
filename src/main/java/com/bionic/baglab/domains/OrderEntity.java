@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "[order]", schema = "baglab")
 public class OrderEntity {
-    private int idOrder;
+    private long idOrder;
     private UserEntity user;
     private OrderStatusEntity orderStatus;
     private Timestamp orderCreate;
@@ -19,11 +19,11 @@ public class OrderEntity {
 
     @Id
     @Column(name = "[idOrder]")
-    public int getIdOrder() {
+    public long getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(int idOrder) {
+    public void setIdOrder(long idOrder) {
         this.idOrder = idOrder;
     }
 
@@ -82,18 +82,22 @@ public class OrderEntity {
         OrderEntity that = (OrderEntity) o;
 
         if (idOrder != that.idOrder) return false;
-//        if (orderStatus != null ? !orderStatus.equals(that.orderStatus) : that.orderStatus != null) return false;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        if (orderStatus != null ? !orderStatus.equals(that.orderStatus) : that.orderStatus != null) return false;
         if (orderCreate != null ? !orderCreate.equals(that.orderCreate) : that.orderCreate != null) return false;
-        return orderUpdate != null ? orderUpdate.equals(that.orderUpdate) : that.orderUpdate == null;
+        if (orderUpdate != null ? !orderUpdate.equals(that.orderUpdate) : that.orderUpdate != null) return false;
+        return models != null ? models.equals(that.models) : that.models == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = idOrder;
-//        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
+        int result = (int) (idOrder ^ (idOrder >>> 32));
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
         result = 31 * result + (orderCreate != null ? orderCreate.hashCode() : 0);
         result = 31 * result + (orderUpdate != null ? orderUpdate.hashCode() : 0);
+        result = 31 * result + (models != null ? models.hashCode() : 0);
         return result;
     }
 }

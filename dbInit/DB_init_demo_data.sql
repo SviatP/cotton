@@ -19,13 +19,23 @@ insert into baglab.material (name, price) values ('jeans', 28.1);
 insert into baglab.material (name, price) values ('leather', 38.5);
 
 
-insert into user  (login,password,email, firstname, lastname, roleId) values ('admin','admin','admin@gmail.com',  'Ivan', 'Onobrenko',1);
-insert into user  (login,password,email, firstname, lastname, roleId) values ('Anna','annaPass', 'demoanna@gmail.com',  'John', 'Doe', 2);
-insert into user  (login,password,email, firstname, lastname, roleId) values ('Peter','peterthebest','peter86@mail.ru','Petruchio','Petrov', 3);
-insert into user  (login,password,email, firstname, lastname, roleId) values ('Finn','demopass','finnthehuman@gmail.com', 'John','Doe2',4);
-insert into user  (login,password,email, firstname, lastname, roleId) values ('Karla','pass','turk@gmail.com', 'John','Doe3',2);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('admin','admin','admin@gmail.com',  'Ivan', 'Onobrenko',1);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Anna','annaPass', 'demoanna@gmail.com',  'John', 'Doe', 2);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Peter','peterthebest','peter86@mail.ru','Petruchio','Petrov', 3);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Finn','demopass','finnthehuman@gmail.com', 'John','Doe2',4);
+insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Karla','pass','turk@gmail.com', 'John','Doe3',2);
 
-
+insert into baglab.order (userId, orderStatusId) VALUES (1,1);
+insert into baglab.order (userId, orderStatusId) VALUES (1,2);
+insert into baglab.order (userId, orderStatusId) VALUES (1,2);
+insert into baglab.order (userId, orderStatusId) VALUES (1,2);
+insert into baglab.order (userId, orderStatusId) VALUES (2,1);
+insert into baglab.order (userId, orderStatusId) VALUES (2,2);
+insert into baglab.order (userId, orderStatusId) VALUES (3,1);
+insert into baglab.order (userId, orderStatusId) VALUES (3,2);
+insert into baglab.order (userId, orderStatusId) VALUES (3,2);
+insert into baglab.order (userId, orderStatusId) VALUES (3,2);
+insert into baglab.order (userId, orderStatusId) VALUES (3,3);
 #------------------------------------------------------
 insert into baglab.country (name) values ('Andorra');
 insert into baglab.country (name) values ('United Arab Emirates');

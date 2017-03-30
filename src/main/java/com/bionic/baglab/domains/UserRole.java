@@ -5,18 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role", schema = "baglab")
 public class UserRole {
-    private int idRole;
+    private long idRole;
     private String name;
     private String description;
     private Byte deleted;
 
     @Id
     @Column(name = "idRole")
-    public int getIdRole() {
+    public long getIdRole() {
         return idRole;
     }
 
-    public void setIdRole(int idRole) {
+    public void setIdRole(long idRole) {
         this.idRole = idRole;
     }
 
@@ -69,10 +69,10 @@ public class UserRole {
 
     @Override
     public int hashCode() {
-        int result = idRole;
+        long result = idRole;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (deleted != null ? deleted.hashCode() : 0);
-        return result;
+        return (int)result;
     }
 }

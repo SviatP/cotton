@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "pages", schema = "baglab")
 public class PagesEntity {
-    private int idnews;
+    private long idnews;
     private String body;
     private String header;
     private Timestamp newsCreate;
@@ -20,11 +20,11 @@ public class PagesEntity {
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
     @Column(name = "idnews", unique = true)
-    public int getIdnews() {
+    public long getIdnews() {
         return idnews;
     }
 
-    public void setIdnews(int idnews) {
+    public void setIdnews(long idnews) {
         this.idnews = idnews;
     }
 
@@ -88,12 +88,12 @@ public class PagesEntity {
 
     @Override
     public int hashCode() {
-        int result = idnews;
+        long result = idnews;
         result = 31 * result + (body != null ? body.hashCode() : 0);
         result = 31 * result + (header != null ? header.hashCode() : 0);
         result = 31 * result + (newsCreate != null ? newsCreate.hashCode() : 0);
         result = 31 * result + (newsUpdate != null ? newsUpdate.hashCode() : 0);
-        return result;
+        return (int)result;
     }
 
     @ManyToOne

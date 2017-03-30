@@ -6,7 +6,7 @@ import com.bionic.baglab.domains.PagesTypeEntity;
 import java.sql.Timestamp;
 
 public class PagesDto {
-    private int idnews;
+    private long idnews;
     private String body;
     private String header;
     private Timestamp newsCreate;
@@ -40,11 +40,11 @@ public class PagesDto {
 
     @Override
     public int hashCode() {
-        int result = idnews;
+        long result = idnews;
         result = 31 * result + (header != null ? header.hashCode() : 0);
         result = 31 * result + newsCreate.hashCode();
         result = 31 * result + newsUpdate.hashCode();
         result = 31 * result + pagesType.hashCode();
-        return result;
+        return (int)result;
     }
 }

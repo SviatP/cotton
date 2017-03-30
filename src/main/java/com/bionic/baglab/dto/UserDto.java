@@ -6,7 +6,7 @@ import com.bionic.baglab.domains.UserEntity;
  * Created by username on 3/26/17.
  */
 public class UserDto {
-    private int idUser;
+    private long idUser;
     private String email;
     private String firstname;
     private String lastname;
@@ -18,12 +18,12 @@ public class UserDto {
         this.lastname=userEntity.getLastname();
     }
 
-    public int getIdUser() {
+    public long getIdUser() {
 
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
 
@@ -67,10 +67,10 @@ public class UserDto {
 
     @Override
     public int hashCode() {
-        int result = idUser;
+        long result = idUser;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        return result;
+        return (int)result;
     }
 }
