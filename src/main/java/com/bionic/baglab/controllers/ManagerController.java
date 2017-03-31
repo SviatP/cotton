@@ -38,7 +38,12 @@ public class ManagerController {
     @Autowired
     OrderStatusService orderStatusService;
 
-    @RequestMapping(value = "/list") //List USERS with ROLE manager "Factory"
+
+    /**
+     *
+     * @return List of USERS with ROLE  "Factory"
+     */
+    @RequestMapping(value = "/list") //
     public ResponseEntity<Set<UserDto>> listAllManagers(){
         Set<UserDto> managers = userService.getAllUsersByRole(managerRole);
             if(managers.isEmpty()){
@@ -47,13 +52,16 @@ public class ManagerController {
         return new ResponseEntity<>(managers, HttpStatus.OK);
     }
 
-    //Manager. List all orders that was approved by Moderator + models in them
+    /**
+     *
+     * @return List all orders that was approved by Moderator + models in them
+     */
     @RequestMapping(value = "/orders")  //todo: bug - show only one orderDTO
     public ResponseEntity<List<OrderDto>> listApprovedOrders(){
         List<OrderDto> orders = orderService.getAllOrdersByStatus(orderStatus);
-        /*if(orders.isEmpty()){
+        if(orders.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);//HttpStatus.NOT_FOUND
-        }*/
+        }
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
@@ -64,13 +72,21 @@ public class ManagerController {
      */
     @RequestMapping(value = "/{id}/{action}") //todo: add limitation to possible actions for Order status
     @ResponseBody
-    public void acceptOrder(@PathVariable long id, @PathVariable String action) {
-        System.out.println("id:------------" + id + "----------" + action);
-        OrderEntity orderEntity = orderService.findOne(id);
-        OrderStatusEntity orderStatusEntity = orderStatusService.findByCode(action);
-        if (!orderEntity.getOrderStatus().equals(orderStatusEntity)){
-            orderEntity.setOrderStatus(orderStatusEntity);
-            orderService.save(orderEntity);
+    public ResponseEntity<Void> acceptOrder(@PathVariable long id, @PathVariable String action) {
+        OrderEntity orderEntity;
+        OrderStatusEntity orderStatusEntity;                                                    //todo: Move to Service
+        try {
+            orderEntity = orderService.findOne(id);
+            orderStatusEntity = orderStatusService.findByCode(action);
+        } catch (Exception ex ) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+            if (!orderEntity.getOrderStatus().equals(orderStatusEntity)){
+                orderEntity.setOrderStatus(orderStatusEntity);
+                orderService.save(orderEntity);
+                return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            }  else
+                return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
 
     }
@@ -79,4 +95,4 @@ public class ManagerController {
 
 
 
-}
+

@@ -11,6 +11,55 @@ public class PagesDto {
     private String header;
     private Timestamp newsCreate;
     private Timestamp newsUpdate;
+
+    public long getIdnews() {
+        return idnews;
+    }
+
+    public void setIdnews(long idnews) {
+        this.idnews = idnews;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public Timestamp getNewsCreate() {
+        return newsCreate;
+    }
+
+    public void setNewsCreate(Timestamp newsCreate) {
+        this.newsCreate = newsCreate;
+    }
+
+    public Timestamp getNewsUpdate() {
+        return newsUpdate;
+    }
+
+    public void setNewsUpdate(Timestamp newsUpdate) {
+        this.newsUpdate = newsUpdate;
+    }
+
+    public PagesTypeEntity getPagesType() {
+        return pagesType;
+    }
+
+    public void setPagesType(PagesTypeEntity pagesType) {
+        this.pagesType = pagesType;
+    }
+
     private PagesTypeEntity pagesType;
 
     public PagesDto() {

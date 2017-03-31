@@ -2,7 +2,11 @@ package com.bionic.baglab.controllers;
 
 import com.bionic.baglab.dao.PagesDao;
 import com.bionic.baglab.domains.PagesEntity;
+import com.bionic.baglab.dto.PagesDto;
+import com.bionic.baglab.services.PagesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,18 +22,19 @@ import java.util.Set;
 public class PagesController {
 
     @Autowired
-    private PagesDao pagesDaoRepo;
+    private PagesService pagesService;
 
-    @RequestMapping("/pages")
-    public Set<PagesEntity> showPages(){
-        HashSet<PagesEntity> pagesSet = null;
+    @RequestMapping("/news")
+    public ResponseEntity<Set<PagesDto>> showPages(){
+        Set<PagesDto> pagesSet = null;
         try {
-            pagesSet = new HashSet<PagesEntity>((List<PagesEntity>)pagesDaoRepo.findAll());
+            pagesSet = pagesService.getAllNews();
         }
         catch (Exception ex){
             System.out.println("error, no pages found: " + ex); //todo: logging
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return  pagesSet;
+        return new ResponseEntity<>(pagesSet, HttpStatus.OK);
     }
 
 }

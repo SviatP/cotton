@@ -24,12 +24,6 @@ INSERT INTO `baglab`.`bag_type` (`idBagType`, `script`) VALUES ('1', '<asd></asd
 INSERT INTO `baglab`.`bag_type` (`idBagType`, `script`) VALUES ('2', 'asd sd');
 INSERT INTO `baglab`.`bag_type` (`idBagType`, `script`) VALUES ('3', 'script asd1s23');
 
-insert into baglab.model (userId, bagTypeId) VALUES (1, 1);
-insert into baglab.model (userId, bagTypeId) VALUES (1, 2);
-insert into baglab.model (userId, bagTypeId) VALUES (2, 1);
-insert into baglab.model (userId, bagTypeId) VALUES (2, 2);
-
-
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('admin','admin','admin@gmail.com',  'Ivan', 'Onobrenko',1);
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Anna','annaPass', 'demoanna@gmail.com',  'John', 'Doe', 2);
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Peter','peterthebest','peter86@mail.ru','Petruchio','Petrov', 3);
@@ -49,6 +43,20 @@ insert into baglab.order (userId, orderStatusId) VALUES (3,2);
 insert into baglab.order (userId, orderStatusId) VALUES (3,2);
 insert into baglab.order (userId, orderStatusId) VALUES (3,2);
 insert into baglab.order (userId, orderStatusId) VALUES (3,3);
+
+insert into baglab.model (userId, bagTypeId) VALUES (1, 1);
+insert into baglab.model (userId, bagTypeId) VALUES (1, 2);
+insert into baglab.model (userId, bagTypeId) VALUES (2, 1);
+insert into baglab.model (userId, bagTypeId) VALUES (2, 2);
+
+INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('1', '1', '21', '243');
+INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('1', '2', '123', '235');
+INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('2', '1', '32', '234');
+INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('2', '3', '43', '11');
+INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('3', '1', '34', '23');
+INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('3', '2', '54', '23');
+
+
 #------------------------------------------------------
 insert into baglab.country (name) values ('Andorra');
 insert into baglab.country (name) values ('United Arab Emirates');
