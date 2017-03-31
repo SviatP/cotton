@@ -45,11 +45,10 @@ public class UserService {
      * @param role - user role from connected table
      * @return Set of all users, specified by 'role'
      */
-    public Set<UserDto> getAllUsersByRole(String role) {
+   public Set<UserDto> getAllUsersByRole(String role) {
         List<UserEntity> userEntities = null;
-        Set<UserDto> userDtos;
         try {
-            userEntities = (List<UserEntity>) userDao.findAllByRoleName(role);
+            userEntities = userDao.findAllByRoleName(role);
         }
         catch (Exception ex) {
             System.out.println("error, no users found. role: " + role+ " ex:" + ex); //todo: logging

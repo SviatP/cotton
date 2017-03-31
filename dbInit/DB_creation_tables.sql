@@ -17,7 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema baglab
 -- -----------------------------------------------------
-Drop SCHEMA baglab;
+#Drop SCHEMA baglab;
 CREATE SCHEMA IF NOT EXISTS `baglab` DEFAULT CHARACTER SET utf8 ;
 USE `baglab` ;
 
@@ -191,7 +191,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `baglab`.`models_order` ;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`models_order` (
-  `modelId` BIGINT NOT NULL AUTO_INCREMENT,
+  `modelId` BIGINT NOT NULL,
   `orderId` BIGINT NOT NULL,
   `count` INT(11) NOT NULL,
   `price` INT NOT NULL,

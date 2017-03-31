@@ -41,4 +41,9 @@ public class OrderService {
         return orderDao.save(orderEntity);
     }
 
+    public List<OrderDto> getAllOrdersByStatus(String status){
+        List<OrderEntity> ordersEntities = orderDao.findAllOrdersByOrderStatusCode(status);
+        return ordersEntities.stream().map(OrderDto::new).collect(Collectors.toList());
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.bionic.baglab.dao;
 
 import com.bionic.baglab.domains.UserEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * A DAO for the domains User is simply created by extending the CrudRepository
@@ -24,5 +26,5 @@ public interface UserDao extends CrudRepository<UserEntity, Long> {
 
     public UserEntity findByLogin(String login);
 
-    public UserEntity findAllByRoleName(String role);
+    public List<UserEntity> findAllByRoleName(String role);
 }
