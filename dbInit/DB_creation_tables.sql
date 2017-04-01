@@ -364,7 +364,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `baglab`.`model_price`;
 
-create table model_price
+create table `baglab`.`model_price`
 (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   modelId INT NOT NULL,
