@@ -11,10 +11,7 @@ import com.bionic.baglab.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -43,7 +40,7 @@ public class ManagerController {
      *
      * @return List of USERS with ROLE  "Factory"
      */
-    @RequestMapping(value = "/list") //
+    @GetMapping(value = "/list") //
     public ResponseEntity<Set<UserDto>> listAllManagers(){
         Set<UserDto> managers = userService.getAllUsersByRole(managerRole);
             if(managers.isEmpty()){
@@ -56,7 +53,7 @@ public class ManagerController {
      *
      * @return List all orders that was approved by Moderator + models in them
      */
-    @RequestMapping(value = "/orders")  //todo: bug - show only one orderDTO
+    @GetMapping(value = "/orders")  //todo: bug - show only one orderDTO
     public ResponseEntity<List<OrderDto>> listApprovedOrders(){
         List<OrderDto> orders = orderService.getAllOrdersByStatus(orderStatus);
         if(orders.isEmpty()){
@@ -70,7 +67,7 @@ public class ManagerController {
      * @param id - order id
      * @param action - new order status
      */
-    @RequestMapping(value = "/{id}/{action}") //todo: add limitation to possible actions for Order status
+    @PostMapping(value = "/{id}/{action}") //todo: add limitation to possible actions for Order status
     @ResponseBody
     public ResponseEntity<Void> acceptOrder(@PathVariable long id, @PathVariable String action) {
         OrderEntity orderEntity;
