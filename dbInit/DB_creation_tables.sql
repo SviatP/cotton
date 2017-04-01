@@ -362,18 +362,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `baglab`.`model_price`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`model_price`;
 
-create table `baglab`.`model_price`
-(
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  modelId INT NOT NULL,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  price INT NULL,
-  constraint table_name_model_idModel_fk
-  foreign key (modelId) references model (idModel)
-)
-ENGINE = InnoDB;
 
 create index model_price_modelId_date_index
   on model_price (modelId, date DESC)
