@@ -11,7 +11,7 @@ public class UserRole {
     private Byte deleted;
 
     @Id
-    @Column(name = "idRole")
+    @Column(name = "idRole", columnDefinition = "INT(11)")
     public long getIdRole() {
         return idRole;
     }

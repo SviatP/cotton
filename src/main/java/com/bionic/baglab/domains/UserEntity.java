@@ -46,7 +46,7 @@ public class UserEntity {
     private UserStatusEntity userStatusByStatusId;*/
 
     @Id
-    @Column(name = "idUser")
+    @Column(name = "idUser", columnDefinition = "INT(11)")
     public long getIdUser() {
         return idUser;
     }
@@ -106,7 +106,7 @@ public class UserEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "roleId")
+    @JoinColumn(name = "roleId", columnDefinition = "INT(11)")
     public UserRole getRole() {
         return role;
     }
@@ -134,7 +134,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "statusId")
+    @Column(name = "statusId", columnDefinition = "INT(11)")
     public long getStatusId() {
         return statusId;
     }

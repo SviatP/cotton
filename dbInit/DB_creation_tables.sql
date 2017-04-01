@@ -123,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `baglab`.`model` (
   `idModel` BIGINT NOT NULL AUTO_INCREMENT,
   `userId` BIGINT NOT NULL,
   `bagTypeId` BIGINT NOT NULL,
+  `deleted` BOOLEAN DEFAULT FALSE,
   `modelCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modelUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idModel`),
@@ -358,7 +359,27 @@ CREATE TABLE IF NOT EXISTS `baglab`.`feedback` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `baglab`.`model_price`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `baglab`.`model_price`;
+
+create table model_price
+(
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  modelId INT NOT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  price INT NULL,
+  constraint table_name_model_idModel_fk
+  foreign key (modelId) references model (idModel)
+)
+ENGINE = InnoDB;
+
+create index model_price_modelId_date_index
+  on model_price (modelId, date DESC)
+;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

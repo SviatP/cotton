@@ -11,7 +11,7 @@ public class PagesTypeEntity {
     //private Collection<PagesEntity> pagesEntityByIdpagesType;
 
     @Id
-    @Column(name = "idpages_type")
+    @Column(name = "idpages_type", columnDefinition = "INT(11)")
     public long getIdpagesType() {
         return idpagesType;
     }

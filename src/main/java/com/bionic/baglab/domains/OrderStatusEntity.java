@@ -18,7 +18,7 @@ public class OrderStatusEntity {
     //    private int deleted;
 
     @Id
-    @Column(name = "`idorder_status`")
+    @Column(name = "`idorder_status`", columnDefinition = "INT(11)")
     public long getIdOrderStatus() {
         return idOrderStatus;
     }

@@ -19,7 +19,7 @@ public class PagesEntity {
     @Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
-    @Column(name = "idnews", unique = true)
+    @Column(name = "idnews", unique = true, columnDefinition = "INT(11)")
     public long getIdnews() {
         return idnews;
     }

@@ -29,15 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/j_spring_security_check")
-                .failureUrl("/login?error")
-                .usernameParameter("j_username")
-                .passwordParameter("j_password")
-                .permitAll()
+                .httpBasic()
                 .and()
                 .logout().logoutSuccessUrl("/login?logout")
                 .and()

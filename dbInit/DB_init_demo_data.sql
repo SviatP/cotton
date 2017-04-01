@@ -322,3 +322,8 @@ insert into baglab.pages (body, header, pagesTypeId) VALUES ('body 1', 'header1'
 insert into baglab.pages (body, header, pagesTypeId) VALUES ('body 2', 'header2', '1');
 insert into baglab.pages (body, header, pagesTypeId) VALUES ('body ARCHIVE', 'header ARCHIVE', '2');
 insert into baglab.pages (body, header, pagesTypeId) VALUES ('body DELETED', 'header DELETED', '3');
+
+insert into baglab.model_price (modelId, date, price) VALUES ('1','20140812003842', '30');
+insert into baglab.model_price (modelId, date, price) VALUES ('2','20140812003843', '210');
+insert into baglab.model_price (modelId, date, price) VALUES ('3','20140812003844', '1330');
+insert into baglab.model_price (modelId, date, price) VALUES ('4','20140812003845','1');
