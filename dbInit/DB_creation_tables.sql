@@ -363,10 +363,10 @@ ENGINE = InnoDB;
 -- Table `baglab`.`model_price`
 -- -----------------------------------------------------
 
-
+/*
 create index model_price_modelId_date_index
   on model_price (modelId, date DESC)
-;
+;*/
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
