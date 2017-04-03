@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * Created by nicot on 4/1/2017.
  */
 @Entity
-@Table(name = "model_price", schema = "baglab")
+@Table(name = "[model_price]", schema = "baglab")
 public class ModelPriceEntity {
 
     private Long id;
@@ -35,7 +35,7 @@ public class ModelPriceEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "modelId")
+    @JoinColumn(name = "[modelId]")
     public ModelEntity getModel() {
         return model;
     }
@@ -45,7 +45,7 @@ public class ModelPriceEntity {
     }
 
     @Basic
-    @Column(name = "date")
+    @Column(name = "[date]")
     public Timestamp getDate() {
         return date;
     }
@@ -55,7 +55,7 @@ public class ModelPriceEntity {
     }
 
     @Basic
-    @Column(name = "price")
+    @Column(name = "[price]")
     public Integer getPrice() {
         return price;
     }

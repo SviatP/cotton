@@ -35,7 +35,7 @@ public class UserDto {
         this.statusId = userEntity.getStatusId();
         this.userCreate = userEntity.getUserCreate();
         this.userUpdate = userEntity.getUserUpdate();
-        this.deleted = userEntity.getDeleted();
+//        this.deleted = userEntity.getDeleted();
     }
 
 

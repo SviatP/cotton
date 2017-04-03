@@ -7,7 +7,7 @@ import java.util.Collection;
  * Created by potaychuk on 28.03.2017.
  */
 @Entity
-@Table(name = "orderStatus", schema = "baglab")
+@Table(name = "[orderStatus]", schema = "baglab")
 public class OrderStatusEntity {
     private long idOrderStatus;
     private String code;
@@ -18,7 +18,7 @@ public class OrderStatusEntity {
     //    private int deleted;
 
     @Id
-    @Column(name = "`idorder_status`", columnDefinition = "INT(11)")
+    @Column(name = "[idorder_status]", columnDefinition = "INT(11)")
     public long getIdOrderStatus() {
         return idOrderStatus;
     }
@@ -28,7 +28,7 @@ public class OrderStatusEntity {
     }
 
 
-    @Column(name = "`code`")
+    @Column(name = "[code]")
     public String getCode() {
         return code;
     }
@@ -37,7 +37,7 @@ public class OrderStatusEntity {
         this.code = code;
     }
 
-    @Column(name = "`description`", columnDefinition = "MEDIUMTEXT")
+    @Column(name = "[description]", columnDefinition = "MEDIUMTEXT")
     public String getDescription() {
         return description;
     }

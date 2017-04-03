@@ -15,18 +15,18 @@ import static java.util.Comparator.comparing;
  * Created by potaychuk on 29.03.2017.
  */
 @Entity
-@Table(name = "model", schema = "baglab")
+@Table(name = "[model]", schema = "baglab")
 public class ModelEntity {
     private long idModel;
     private Timestamp modelCreate;
     private Timestamp modelUpdate;
-    private boolean deleted;
+//    private boolean deleted;
     private UserEntity user;
     private Collection<OrderEntity> orders;
-    private List<ModelPriceEntity> priceEntities;
+//    private List<ModelPriceEntity> priceEntities;
 
     @Id
-    @Column(name = "idModel", columnDefinition = "INT(11)")
+    @Column(name = "[idModel]", columnDefinition = "INT(11)")
     public long getIdModel() {
         return idModel;
     }
@@ -36,7 +36,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "modelCreate")
+    @Column(name = "[modelCreate]")
     public Timestamp getModelCreate() {
         return modelCreate;
     }
@@ -46,7 +46,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "modelUpdate")
+    @Column(name = "[modelUpdate]")
     public Timestamp getModelUpdate() {
         return modelUpdate;
     }
@@ -55,18 +55,18 @@ public class ModelEntity {
         this.modelUpdate = modelUpdate;
     }
 
-    @Basic
-    @Column(name = "deleted")
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
+//    @Basic
+//    @Column(name = "[deleted]")
+//    public boolean getDeleted() {
+//        return deleted;
+//    }
+//
+//    public void setDeleted(boolean deleted) {
+//        this.deleted = deleted;
+//    }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", columnDefinition = "INT(11)")
+    @JoinColumn(name = "[userId]", columnDefinition = "INT(11)")
     public UserEntity getUser() {
         return user;
     }
@@ -87,22 +87,22 @@ public class ModelEntity {
         this.orders = orders;
     }
 
-    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL)
-    @JsonIgnore
-    public List<ModelPriceEntity> getPriceEntities() {
-        return priceEntities;
-    }
-
-    public void setPriceEntities(List<ModelPriceEntity> priceEntities) {
-        this.priceEntities = priceEntities;
-    }
-
-    @Transient
-    public Integer getPrice() {
-        return !priceEntities.isEmpty()
-                ? priceEntities.get(priceEntities.size()-1).getPrice()
-                : null;
-    }
+//    @OneToMany(mappedBy = "[model]", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    public List<ModelPriceEntity> getPriceEntities() {
+//        return priceEntities;
+//    }
+//
+//    public void setPriceEntities(List<ModelPriceEntity> priceEntities) {
+//        this.priceEntities = priceEntities;
+//    }
+//
+//    @Transient
+//    public Integer getPrice() {
+//        return !priceEntities.isEmpty()
+//                ? priceEntities.get(priceEntities.size()-1).getPrice()
+//                : null;
+//    }
 
     @Override
     public boolean equals(Object o) {
