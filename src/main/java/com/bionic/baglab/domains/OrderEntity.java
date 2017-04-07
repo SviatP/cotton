@@ -8,7 +8,7 @@ import java.util.Collection;
  * Created by potaychuk on 28.03.2017.
  */
 @Entity
-@Table(name = "order", schema = "baglab")
+@Table(name = "[order]", schema = "baglab")
 public class OrderEntity {
     private long idOrder;
     private UserEntity user;
@@ -18,7 +18,7 @@ public class OrderEntity {
     private Collection<ModelEntity> models;
 
     @Id
-    @Column(name = "idOrder", columnDefinition = "INT(11)")
+    @Column(name = "[idOrder]", columnDefinition = "INT(11)")
     public long getIdOrder() {
         return idOrder;
     }
@@ -28,7 +28,7 @@ public class OrderEntity {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", columnDefinition = "INT(11)")
+    @JoinColumn(name = "[userId]", columnDefinition = "INT(11)")
     public UserEntity getUser() {
         return this.user;
     }
@@ -38,7 +38,7 @@ public class OrderEntity {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderStatusId", columnDefinition = "INT(11)")
+    @JoinColumn(name = "[orderStatusId]", columnDefinition = "INT(11)")
     public OrderStatusEntity getOrderStatus() {
         return orderStatus;
     }
@@ -47,7 +47,7 @@ public class OrderEntity {
         this.orderStatus = orderStatusId;
     }
 
-    @Column(name = "orderCreate")
+    @Column(name = "[orderCreate]")
     public Timestamp getOrderCreate() {
         return orderCreate;
     }
@@ -56,7 +56,7 @@ public class OrderEntity {
         this.orderCreate = orderCreate;
     }
 
-    @Column(name = "orderUpdate")
+    @Column(name = "[orderUpdate]")
     public Timestamp getOrderUpdate() {
         return orderUpdate;
     }

@@ -9,7 +9,7 @@ import java.util.Collection;
  */
 
 @Entity
-@Table(name = "user", schema = "baglab")
+@Table(name = "[user]", schema = "baglab")
 public class UserEntity {
 
     public final static String user = "Admin";
@@ -46,7 +46,7 @@ public class UserEntity {
     private UserStatusEntity userStatusByStatusId;*/
 
     @Id
-    @Column(name = "idUser", columnDefinition = "INT(11)")
+    @Column(name = "[idUser]", columnDefinition = "INT(11)")
     public long getIdUser() {
         return idUser;
     }
@@ -56,7 +56,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "login")
+    @Column(name = "[login]")
     public String getLogin() {
         return login;
     }
@@ -66,7 +66,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "[password]")
     public String getPassword() {
         return password;
     }
@@ -76,7 +76,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "[email]")
     public String getEmail() {
         return email;
     }
@@ -86,7 +86,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "firstname")
+    @Column(name = "[firstname]")
     public String getFirstname() {
         return firstname;
     }
@@ -96,7 +96,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "lastname")
+    @Column(name = "[lastname]")
     public String getLastname() {
         return lastname;
     }
@@ -106,7 +106,7 @@ public class UserEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "roleId", columnDefinition = "INT(11)")
+    @JoinColumn(name = "[roleId]", columnDefinition = "INT(11)")
     public UserRole getRole() {
         return role;
     }
@@ -134,7 +134,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "statusId", columnDefinition = "INT(11)")
+    @Column(name = "[statusId]", columnDefinition = "INT(11)")
     public long getStatusId() {
         return statusId;
     }
@@ -144,7 +144,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "userCreate")
+    @Column(name = "[userCreate]")
     public Timestamp getUserCreate() {
         return userCreate;
     }
@@ -154,7 +154,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "userUpdate")
+    @Column(name = "[userUpdate]")
     public Timestamp getUserUpdate() {
         return userUpdate;
     }
@@ -165,7 +165,7 @@ public class UserEntity {
 
 
     @Basic
-    @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
+    @Column(name = "[deleted]", columnDefinition = "BitTypeDescriptor")
     //@Type(type = "org.hibernate.type.BigIntegerType") org.hibernate.type.descr
     public byte getDeleted() {
         return deleted;

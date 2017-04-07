@@ -3,7 +3,7 @@ package com.bionic.baglab.domains;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role", schema = "baglab")
+@Table(name = "[role]", schema = "baglab")
 public class UserRole {
     private long idRole;
     private String name;
@@ -11,7 +11,7 @@ public class UserRole {
     private Byte deleted;
 
     @Id
-    @Column(name = "idRole", columnDefinition = "INT(11)")
+    @Column(name = "[idRole]", columnDefinition = "INT(11)")
     public long getIdRole() {
         return idRole;
     }
@@ -21,7 +21,7 @@ public class UserRole {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "[name]")
     public String getName() {
         return name;
     }
@@ -31,7 +31,7 @@ public class UserRole {
     }
 
     @Basic
-    @Column(name = "description", columnDefinition="mediumtext")
+    @Column(name = "[description]", columnDefinition="mediumtext")
 //    @Lob
     public String getDescription() {
         return description;
@@ -42,7 +42,7 @@ public class UserRole {
     }
 
     @Basic
-    @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
+    @Column(name = "[deleted]", columnDefinition = "BitTypeDescriptor")
     //@Type(type = "org.hibernate.type.BigIntegerType") org.hibernate.type.descr
     public byte getDeleted() {
         return deleted;
