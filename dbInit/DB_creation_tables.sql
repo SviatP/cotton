@@ -13,6 +13,20 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema baglab
 -- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Table `baglab`.`orderStatus`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `baglab`.`model_status`;
+
+CREATE TABLE IF NOT EXISTS `baglab`.`model_status` (
+  `idModelStatus` BIGINT      NOT NULL AUTO_INCREMENT,
+  `code`           VARCHAR(45) NOT NULL,
+  `description`    MEDIUMTEXT  NULL     DEFAULT NULL,
+  `deleted`        BOOLEAN     NOT NULL DEFAULT 0,
+  PRIMARY KEY (`idModelStatus`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Schema baglab
@@ -126,6 +140,7 @@ CREATE TABLE IF NOT EXISTS `baglab`.`model` (
   `price`       INT       NOT NULL,
   `userId`      BIGINT    NOT NULL,
   `bagTypeId`   BIGINT    NOT NULL,
+  `modelStatusId`   BIGINT    NOT NULL,
   `deleted`     BOOLEAN            DEFAULT FALSE,
   `modelCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modelUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -141,6 +156,10 @@ CREATE TABLE IF NOT EXISTS `baglab`.`model` (
   CONSTRAINT `fk_model_bag_type1`
   FOREIGN KEY (`bagTypeId`)
   REFERENCES `baglab`.`bag_type` (`idBagType`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  FOREIGN KEY (`modelStatusId`)
+  REFERENCES `baglab`.`model_status` (`idModelStatus`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )

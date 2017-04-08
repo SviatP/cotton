@@ -11,6 +11,7 @@ insert into baglab.user_status (code, description) values ('Inactive', 'User los
 insert into baglab.user_status (code, description) values ('Bane', 'User is banned');
 
 insert into baglab.orderStatus (code, description) values ('accepted', 'order is accepted and send to factory');
+insert into baglab.orderStatus (code, description) values ('queue', 'order in queue');
 insert into baglab.orderStatus (code, description) values ('processing', 'order is processing by moderator');
 insert into baglab.orderStatus (code, description) values ('denied', 'order is denied by moderator');
 insert into baglab.orderStatus (code, description) values ('send', 'order is shipped from factory');

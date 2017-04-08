@@ -34,6 +34,12 @@ public class ModeratorController {
         return orderService.findAll();
     }
 
+    @RequestMapping(value = "/orders", method = RequestMethod.POST)
+    @ResponseBody
+    public Set<OrderDto> getOrdersS() {
+        return orderService.findAll();
+    }
+
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     @ResponseBody
     public OrderDto getOrderById( @PathVariable long id) {
