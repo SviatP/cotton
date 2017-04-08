@@ -3,6 +3,7 @@ package com.bionic.baglab.dao;
 import com.bionic.baglab.domains.ModelEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ public interface ModelDao extends CrudRepository<ModelEntity, Long> {
 //    List<ModelEntity> findExistent();
 
     @Query("select model from ModelEntity model where model.user.idUser = :id")
-    List<ModelEntity> findAllModelsbyUserId (@Param ("id") long userId);
+    List<ModelEntity> findAllModelsbyUserId (@Param("id") long userId);
 
 
 }
