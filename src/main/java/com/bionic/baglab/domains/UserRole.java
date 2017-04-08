@@ -32,7 +32,6 @@ public class UserRole {
 
     @Basic
     @Column(name = "description", columnDefinition="mediumtext")
-//    @Lob
     public String getDescription() {
         return description;
     }

@@ -22,8 +22,8 @@ public class ModelEntity {
     private Timestamp modelUpdate;
     private boolean deleted;
     private UserEntity user;
-    private Collection<OrderEntity> orders;
-    private List<ModelPriceEntity> priceEntities;
+    private List<OrderEntity> orders;
+    private int price;
 
     @Id
     @Column(name = "idModel", columnDefinition = "INT(11)")
@@ -75,34 +75,43 @@ public class ModelEntity {
         this.user = user;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "models_order", catalog = "baglab", joinColumns = {
-            @JoinColumn(name = "modelId") },inverseJoinColumns = {
-            @JoinColumn(name = "orderId") })
-    public Collection<OrderEntity> getOrders() {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "models_order", catalog = "baglab",
+            joinColumns = @JoinColumn(name = "modelId"),
+            inverseJoinColumns = @JoinColumn(name = "orderId")
+    )
+    public List<OrderEntity> getOrders() {
         return orders;
     }
 
-    public void setOrders(Collection<OrderEntity> orders) {
+    public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
-
-    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL)
-    @JsonIgnore
-    public List<ModelPriceEntity> getPriceEntities() {
-        return priceEntities;
+    @Basic
+    @Column(name = "price")
+    public int getPrice() {
+        return price;
     }
 
-    public void setPriceEntities(List<ModelPriceEntity> priceEntities) {
-        this.priceEntities = priceEntities;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    @Transient
-    public Integer getPrice() {
-        return !priceEntities.isEmpty()
-                ? priceEntities.get(priceEntities.size()-1).getPrice()
-                : null;
-    }
+    //    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL)
+//    public List<ModelPriceEntity> getPriceEntities() {
+//        return priceEntities;
+//    }
+//
+//    public void setPriceEntities(List<ModelPriceEntity> priceEntities) {
+//        this.priceEntities = priceEntities;
+//    }
+//
+//    @Transient
+//    public Integer getPrice() {
+//        return !priceEntities.isEmpty()
+//                ? priceEntities.get(priceEntities.size()-1).getPrice()
+//                : null;
+//    }
 
     @Override
     public boolean equals(Object o) {
