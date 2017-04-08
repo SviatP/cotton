@@ -15,18 +15,18 @@ import static java.util.Comparator.comparing;
  * Created by potaychuk on 29.03.2017.
  */
 @Entity
-@Table(name = "[model]", schema = "baglab")
+@Table(name = "model", schema = "baglab")
 public class ModelEntity {
     private long idModel;
     private Timestamp modelCreate;
     private Timestamp modelUpdate;
     private boolean deleted;
     private UserEntity user;
-    private Collection<OrderEntity> orders;
-
+    private List<OrderEntity> orders;
+    private int price;
 
     @Id
-    @Column(name = "[idModel]", columnDefinition = "INT(11)")
+    @Column(name = "idModel", columnDefinition = "INT(11)")
     public long getIdModel() {
         return idModel;
     }
@@ -36,7 +36,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "[modelCreate]")
+    @Column(name = "modelCreate")
     public Timestamp getModelCreate() {
         return modelCreate;
     }
@@ -46,7 +46,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "[modelUpdate]")
+    @Column(name = "modelUpdate")
     public Timestamp getModelUpdate() {
         return modelUpdate;
     }
@@ -56,7 +56,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "[deleted]")
+    @Column(name = "deleted")
     public boolean isDeleted() {
         return deleted;
     }
@@ -66,7 +66,7 @@ public class ModelEntity {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "[userId]", columnDefinition = "INT(11)")
+    @JoinColumn(name = "userId", columnDefinition = "INT(11)")
     public UserEntity getUser() {
         return user;
     }
@@ -75,17 +75,43 @@ public class ModelEntity {
         this.user = user;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "models_order", catalog = "baglab", joinColumns = {
-            @JoinColumn(name = "modelId") },inverseJoinColumns = {
-            @JoinColumn(name = "orderId") })
-    public Collection<OrderEntity> getOrders() {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "models_order", catalog = "baglab",
+            joinColumns = @JoinColumn(name = "modelId"),
+            inverseJoinColumns = @JoinColumn(name = "orderId")
+    )
+    public List<OrderEntity> getOrders() {
         return orders;
     }
 
-    public void setOrders(Collection<OrderEntity> orders) {
+    public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
+    @Basic
+    @Column(name = "price")
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    //    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL)
+//    public List<ModelPriceEntity> getPriceEntities() {
+//        return priceEntities;
+//    }
+//
+//    public void setPriceEntities(List<ModelPriceEntity> priceEntities) {
+//        this.priceEntities = priceEntities;
+//    }
+//
+//    @Transient
+//    public Integer getPrice() {
+//        return !priceEntities.isEmpty()
+//                ? priceEntities.get(priceEntities.size()-1).getPrice()
+//                : null;
+//    }
 
     @Override
     public boolean equals(Object o) {

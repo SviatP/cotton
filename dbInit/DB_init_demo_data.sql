@@ -15,14 +15,14 @@ insert into baglab.orderStatus (code, description) values ('processing', 'order 
 insert into baglab.orderStatus (code, description) values ('denied', 'order is denied by moderator');
 insert into baglab.orderStatus (code, description) values ('send', 'order is shipped from factory');
 
-insert into baglab.material (name, price) values ('cotton', 20.2);
-insert into baglab.material (name, price) values ('jeans', 28.1);
-insert into baglab.material (name, price) values ('leather', 38.5);
+insert into baglab.material (name) values ('cotton');
+insert into baglab.material (name) values ('jeans');
+insert into baglab.material (name) values ('leather');
 
 
-INSERT INTO `baglab`.`bag_type` (`idBagType`, `script`) VALUES ('1', '<asd></asd>');
-INSERT INTO `baglab`.`bag_type` (`idBagType`, `script`) VALUES ('2', 'asd sd');
-INSERT INTO `baglab`.`bag_type` (`idBagType`, `script`) VALUES ('3', 'script asd1s23');
+INSERT INTO `baglab`.`bag_type` (`script`) VALUES ('<asd></asd>');
+INSERT INTO `baglab`.`bag_type` (`script`) VALUES ('asd sd');
+INSERT INTO `baglab`.`bag_type` (`script`) VALUES ('script asd1s23');
 
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('admin','admin','admin@gmail.com',  'Ivan', 'Onobrenko',1);
 insert into baglab.user  (login,password,email, firstname, lastname, roleId) values ('Anna','annaPass', 'demoanna@gmail.com',  'John', 'Doe', 2);
@@ -45,10 +45,10 @@ insert into baglab.order (userId, orderStatusId) VALUES (3,2);
 insert into baglab.order (userId, orderStatusId) VALUES (3,2);
 insert into baglab.order (userId, orderStatusId) VALUES (3,3);
 
-insert into baglab.model (userId, bagTypeId) VALUES (1, 1);
-insert into baglab.model (userId, bagTypeId) VALUES (1, 2);
-insert into baglab.model (userId, bagTypeId) VALUES (2, 1);
-insert into baglab.model (userId, bagTypeId) VALUES (2, 2);
+insert into baglab.model (userId, bagTypeId, price) VALUES (1, 1, 57);
+insert into baglab.model (userId, bagTypeId, price) VALUES (1, 2,567);
+insert into baglab.model (userId, bagTypeId, price) VALUES (2, 1,3456);
+insert into baglab.model (userId, bagTypeId, price) VALUES (2, 2,75);
 
 INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('1', '1', '21', '243');
 INSERT INTO `baglab`.`models_order` (`modelId`, `orderId`, `count`, `price`) VALUES ('1', '2', '123', '235');
@@ -312,6 +312,17 @@ insert into baglab.country (name) values ('Zimbabwe');
 
 insert into baglab.shipping_adress (contactName, countryId, street, apartment, state, city, zipcode, mobile, userId) values ('Ivan Onobrenko',132,'Tkachenko','23','Kiev','Kiev','08187','+380683842905', 1);
 insert into baglab.shipping_adress (contactName, countryId, street, apartment, state, city, zipcode, mobile, userId) values ('John Doe',135,'Main Avenu','3','Alabama', 'Calera','AL 35040','+1 205-668-0402', 2);
+#-------------------------
+insert into baglab.bag_type_price(bag_type_id, date, price) values (1,NOW(), 778);
+insert into baglab.bag_type_price(bag_type_id, date, price) values (1,NOW(), 778);
+insert into baglab.bag_type_price(bag_type_id, date, price) values (2,NOW(), 778);
+insert into baglab.bag_type_price(bag_type_id, date, price) values (2,NOW(), 778);
+
+#-------------------------
+insert into baglab.material_price(materialId, date, price) values (1,NOW(), 1778);
+insert into baglab.material_price(materialId, date, price) values (3,NOW(), 2778);
+insert into baglab.material_price(materialId, date, price) values (1,NOW(), 3778);
+insert into baglab.material_price(materialId, date, price) values (2,NOW(), 4778);
 
 #-------------------------
 insert into baglab.pages_type (type) VALUES ('ACTIVE');

@@ -65,7 +65,7 @@ public class OrderEntity {
         this.orderUpdate = orderUpdate;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "orders")
     public Collection<ModelEntity> getModels() {
         return models;
     }

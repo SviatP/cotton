@@ -3,9 +3,9 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
+SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
+SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -18,357 +18,385 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema baglab
 -- -----------------------------------------------------
 #Drop SCHEMA baglab;
-CREATE SCHEMA IF NOT EXISTS `baglab` DEFAULT CHARACTER SET utf8 ;
-USE `baglab` ;
+CREATE SCHEMA IF NOT EXISTS `baglab`
+  DEFAULT CHARACTER SET utf8;
+USE `baglab`;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`bag_type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`bag_type` ;
+DROP TABLE IF EXISTS `baglab`.`bag_type`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`bag_type` (
-  `idBagType` BIGINT NOT NULL,
-  `script` MEDIUMTEXT NOT NULL,
-  PRIMARY KEY (`idBagType`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+  `idBagType` BIGINT     NOT NULL AUTO_INCREMENT,
+  `script`    MEDIUMTEXT NOT NULL,
+  INDEX `idBagType` (`idBagType` ASC),
+  PRIMARY KEY (`idBagType`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`material`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`material` ;
+DROP TABLE IF EXISTS `baglab`.`material`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`material` (
-  `idmaterial` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `price` DOUBLE NOT NULL,
-  `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
-  PRIMARY KEY (`idmaterial`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+  `idmaterial` BIGINT      NOT NULL AUTO_INCREMENT,
+  `name`       VARCHAR(45) NOT NULL,
+  `deleted`    BOOLEAN     NOT NULL DEFAULT FALSE,
+  INDEX `idmaterial` (`idmaterial` ASC),
+  PRIMARY KEY (`idmaterial`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`role` ;
+DROP TABLE IF EXISTS `baglab`.`role`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`role` (
-  `idRole` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `description` MEDIUMTEXT NOT NULL,
-  `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
-  PRIMARY KEY (`idRole`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+  `idRole`      BIGINT      NOT NULL AUTO_INCREMENT,
+  `name`        VARCHAR(45) NOT NULL,
+  `description` MEDIUMTEXT  NOT NULL,
+  `deleted`     BOOLEAN     NOT NULL DEFAULT FALSE,
+  PRIMARY KEY (`idRole`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`user_status`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`user_status` ;
+DROP TABLE IF EXISTS `baglab`.`user_status`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`user_status` (
-  `idstatus` BIGINT NOT NULL AUTO_INCREMENT,
-  `code` VARCHAR(45) NOT NULL,
-  `description` MEDIUMTEXT NOT NULL,
-  PRIMARY KEY (`idstatus`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+  `idstatus`    BIGINT      NOT NULL AUTO_INCREMENT,
+  `code`        VARCHAR(45) NOT NULL,
+  `description` MEDIUMTEXT  NOT NULL,
+  PRIMARY KEY (`idstatus`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`user` ;
+DROP TABLE IF EXISTS `baglab`.`user`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`user` (
-  `idUser` BIGINT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(64) NOT NULL,
-  `email` VARCHAR(254) NOT NULL,
-  `firstname` VARCHAR(45) NOT NULL,
-  `lastname` VARCHAR(45) NOT NULL,
-  `roleId` BIGINT NULL DEFAULT NULL,
-  `statusId` BIGINT NULL DEFAULT '1',
-  `userCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `userUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted` BOOLEAN NOT NULL DEFAULT FALSE,
+  `idUser`     BIGINT       NOT NULL AUTO_INCREMENT,
+  `login`      VARCHAR(45)  NOT NULL,
+  `password`   VARCHAR(64)  NOT NULL,
+  `email`      VARCHAR(254) NOT NULL,
+  `firstname`  VARCHAR(45)  NOT NULL,
+  `lastname`   VARCHAR(45)  NOT NULL,
+  `roleId`     BIGINT       NULL     DEFAULT NULL,
+  `statusId`   BIGINT       NULL     DEFAULT '1',
+  `userCreate` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userUpdate` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted`    BOOLEAN      NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`idUser`),
   UNIQUE INDEX `login_UNIQUE` (`login` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   INDEX `fk_user_role1_idx` (`roleId` ASC),
   INDEX `fk_user_status1_idx` (`statusId` ASC),
   CONSTRAINT `fk_user_role1`
-    FOREIGN KEY (`roleId`)
-    REFERENCES `baglab`.`role` (`idRole`)
+  FOREIGN KEY (`roleId`)
+  REFERENCES `baglab`.`role` (`idRole`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_status1`
-    FOREIGN KEY (`statusId`)
-    REFERENCES `baglab`.`user_status` (`idstatus`)
+  FOREIGN KEY (`statusId`)
+  REFERENCES `baglab`.`user_status` (`idstatus`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`model`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`model` ;
+DROP TABLE IF EXISTS `baglab`.`model`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`model` (
-  `idModel` BIGINT NOT NULL AUTO_INCREMENT,
-  `userId` BIGINT NOT NULL,
-  `bagTypeId` BIGINT NOT NULL,
-  `deleted` BOOLEAN DEFAULT FALSE,
+  `idModel`     BIGINT    NOT NULL AUTO_INCREMENT,
+  `price`       INT       NOT NULL,
+  `userId`      BIGINT    NOT NULL,
+  `bagTypeId`   BIGINT    NOT NULL,
+  `deleted`     BOOLEAN            DEFAULT FALSE,
   `modelCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modelUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idModel`),
   INDEX `fk_Model_User_idx` (`userId` ASC),
   INDEX `fk_model_bag_type1_idx` (`bagTypeId` ASC),
+  INDEX `idModel` (`idModel` ASC),
   CONSTRAINT `fk_Model_User`
-    FOREIGN KEY (`userId`)
-    REFERENCES `baglab`.`user` (`idUser`)
+  FOREIGN KEY (`userId`)
+  REFERENCES `baglab`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_model_bag_type1`
-    FOREIGN KEY (`bagTypeId`)
-    REFERENCES `baglab`.`bag_type` (`idBagType`)
+  FOREIGN KEY (`bagTypeId`)
+  REFERENCES `baglab`.`bag_type` (`idBagType`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`orderStatus`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`orderStatus` ;
+DROP TABLE IF EXISTS `baglab`.`orderStatus`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`orderStatus` (
-  `idorder_status` BIGINT NOT NULL AUTO_INCREMENT,
-  `code` VARCHAR(45) NOT NULL,
-  `description` MEDIUMTEXT NULL DEFAULT NULL,
-  `deleted` BOOLEAN NOT NULL DEFAULT 0,
-  PRIMARY KEY (`idorder_status`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+  `idorder_status` BIGINT      NOT NULL AUTO_INCREMENT,
+  `code`           VARCHAR(45) NOT NULL,
+  `description`    MEDIUMTEXT  NULL     DEFAULT NULL,
+  `deleted`        BOOLEAN     NOT NULL DEFAULT 0,
+  PRIMARY KEY (`idorder_status`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`order` ;
+DROP TABLE IF EXISTS `baglab`.`order`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`order` (
-  `idOrder` BIGINT NOT NULL AUTO_INCREMENT,
-  `userId` BIGINT NOT NULL,
-  `orderStatusId` BIGINT NOT NULL,
-  `orderCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `orderUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `idOrder`       BIGINT    NOT NULL AUTO_INCREMENT,
+  `userId`        BIGINT    NOT NULL,
+  `orderStatusId` BIGINT    NOT NULL,
+  `orderCreate`   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `orderUpdate`   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idOrder`),
   INDEX `fk_Order_User1_idx` (`userId` ASC),
   INDEX `fk_order_order_status1_idx` (`orderStatusId` ASC),
   CONSTRAINT `fk_Order_User1`
-    FOREIGN KEY (`userId`)
-    REFERENCES `baglab`.`user` (`idUser`)
+  FOREIGN KEY (`userId`)
+  REFERENCES `baglab`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_order_status1`
-    FOREIGN KEY (`orderStatusId`)
-    REFERENCES `baglab`.`orderStatus` (`idorder_status`)
+  FOREIGN KEY (`orderStatusId`)
+  REFERENCES `baglab`.`orderStatus` (`idorder_status`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`models_order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`models_order` ;
+DROP TABLE IF EXISTS `baglab`.`models_order`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`models_order` (
-  `modelId` BIGINT NOT NULL,
-  `orderId` BIGINT NOT NULL,
-  `count` INT(11) NOT NULL,
-  `price` INT NOT NULL,
+  `modelId` BIGINT  NOT NULL,
+  `orderId` BIGINT  NOT NULL,
+  `count`   INT(11) NOT NULL,
+  `price`   INT     NOT NULL,
   PRIMARY KEY (`modelId`, `orderId`),
   INDEX `fk_modelsInOrder_Order1_idx` (`orderId` ASC),
   CONSTRAINT `fk_modelsInOrder_Model1`
-    FOREIGN KEY (`modelId`)
-    REFERENCES `baglab`.`model` (`idModel`)
+  FOREIGN KEY (`modelId`)
+  REFERENCES `baglab`.`model` (`idModel`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_modelsInOrder_Order1`
-    FOREIGN KEY (`orderId`)
-    REFERENCES `baglab`.`order` (`idOrder`)
+  FOREIGN KEY (`orderId`)
+  REFERENCES `baglab`.`order` (`idOrder`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`panel`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`panel` ;
+DROP TABLE IF EXISTS `baglab`.`panel`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`panel` (
-  `idPanel` BIGINT  NOT NULL AUTO_INCREMENT,
+  `idPanel`    BIGINT       NOT NULL AUTO_INCREMENT,
   `pictureURL` VARCHAR(255) NULL,
-  `colourRGB` INT(11) NOT NULL,
-  `bagTypeId` BIGINT NOT NULL,
-  `materialId` BIGINT NOT NULL,
+  `colourRGB`  INT(11)      NOT NULL,
+  `bagTypeId`  BIGINT       NOT NULL,
+  `materialId` BIGINT       NOT NULL,
   PRIMARY KEY (`idPanel`, `bagTypeId`),
   INDEX `fk_panel_bag_type1_idx` (`bagTypeId` ASC),
   INDEX `fk_panel_material1_idx` (`materialId` ASC),
   CONSTRAINT `fk_panel_bag_type1`
-    FOREIGN KEY (`bagTypeId`)
-    REFERENCES `baglab`.`bag_type` (`idBagType`)
+  FOREIGN KEY (`bagTypeId`)
+  REFERENCES `baglab`.`bag_type` (`idBagType`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_panel_material1`
-    FOREIGN KEY (`materialId`)
-    REFERENCES `baglab`.`material` (`idmaterial`)
+  FOREIGN KEY (`materialId`)
+  REFERENCES `baglab`.`material` (`idmaterial`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`country`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`country` ;
+DROP TABLE IF EXISTS `baglab`.`country`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`country` (
-  `idcountry` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  PRIMARY KEY (`idcountry`))
-ENGINE = InnoDB;
-
+  `idcountry` BIGINT      NOT NULL AUTO_INCREMENT,
+  `name`      VARCHAR(45) NULL,
+  PRIMARY KEY (`idcountry`)
+)
+  ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`shipping_adress`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`shipping_adress` ;
+DROP TABLE IF EXISTS `baglab`.`shipping_adress`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`shipping_adress` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `id`          BIGINT      NOT NULL AUTO_INCREMENT,
   `contactName` VARCHAR(45) NOT NULL,
-  `street` VARCHAR(45) NOT NULL,
-  `apartment` VARCHAR(45) NULL DEFAULT NULL,
-  `state` VARCHAR(45) NOT NULL,
-  `city` VARCHAR(45) NOT NULL,
-  `zipcode` VARCHAR(45) NULL DEFAULT NULL,
-  `mobile` VARCHAR(45) NULL DEFAULT NULL,
-  `userId` BIGINT NOT NULL,
-  `countryId` BIGINT NOT NULL,
+  `street`      VARCHAR(45) NOT NULL,
+  `apartment`   VARCHAR(45) NULL     DEFAULT NULL,
+  `state`       VARCHAR(45) NOT NULL,
+  `city`        VARCHAR(45) NOT NULL,
+  `zipcode`     VARCHAR(45) NULL     DEFAULT NULL,
+  `mobile`      VARCHAR(45) NULL     DEFAULT NULL,
+  `userId`      BIGINT      NOT NULL,
+  `countryId`   BIGINT      NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_shipping_adress_user1_idx` (`userId` ASC),
   INDEX `fk_shipping_adress_country1_idx` (`countryId` ASC),
   CONSTRAINT `fk_shipping_adress_user1`
-    FOREIGN KEY (`userId`)
-    REFERENCES `baglab`.`user` (`idUser`)
+  FOREIGN KEY (`userId`)
+  REFERENCES `baglab`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_shipping_adress_country1`
-    FOREIGN KEY (`countryId`)
-    REFERENCES `baglab`.`country` (`idcountry`)
+  FOREIGN KEY (`countryId`)
+  REFERENCES `baglab`.`country` (`idcountry`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB
 
-DEFAULT CHARACTER SET = utf8;
-
+  DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`pages_type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`pages_type` ;
+DROP TABLE IF EXISTS `baglab`.`pages_type`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`pages_type` (
-  `idpages_type` BIGINT  NOT NULL AUTO_INCREMENT,
-  `type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idpages_type`))
-ENGINE = InnoDB;
-
+  `idpages_type` BIGINT      NOT NULL AUTO_INCREMENT,
+  `type`         VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idpages_type`)
+)
+  ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`pages`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`pages` ;
+DROP TABLE IF EXISTS `baglab`.`pages`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`pages` (
-  `idnews` BIGINT NOT NULL AUTO_INCREMENT,
-  `body` MEDIUMTEXT NULL,
-  `header` VARCHAR(45) NULL,
-  `newsCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `newsUpdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `pagesTypeId` BIGINT NOT NULL,
+  `idnews`      BIGINT      NOT NULL AUTO_INCREMENT,
+  `body`        MEDIUMTEXT  NULL,
+  `header`      VARCHAR(45) NULL,
+  `newsCreate`  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `newsUpdate`  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `pagesTypeId` BIGINT      NOT NULL,
   PRIMARY KEY (`idnews`),
   INDEX `fk_pages_pages_type1_idx` (`pagesTypeId` ASC),
   CONSTRAINT `fk_pages_pages_type1`
-    FOREIGN KEY (`pagesTypeId`)
-    REFERENCES `baglab`.`pages_type` (`idpages_type`)
+  FOREIGN KEY (`pagesTypeId`)
+  REFERENCES `baglab`.`pages_type` (`idpages_type`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`feedback_status`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`feedback_status` ;
+DROP TABLE IF EXISTS `baglab`.`feedback_status`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`feedback_status` (
-  `idfeedback_status` BIGINT NOT NULL AUTO_INCREMENT,
-  `status` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idfeedback_status`))
-ENGINE = InnoDB;
-
+  `idfeedback_status` BIGINT      NOT NULL AUTO_INCREMENT,
+  `status`            VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idfeedback_status`)
+)
+  ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`feedback`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`feedback` ;
+DROP TABLE IF EXISTS `baglab`.`feedback`;
 
 CREATE TABLE IF NOT EXISTS `baglab`.`feedback` (
-  `idfeedback` BIGINT NOT NULL AUTO_INCREMENT,
-  `text` MEDIUMTEXT NOT NULL,
-  `userId` BIGINT NOT NULL,
-  `userCreate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deleted` BOOLEAN NOT NULL DEFAULT FALSE ,
-  `feedbackStatuIid` BIGINT NOT NULL,
+  `idfeedback`       BIGINT     NOT NULL AUTO_INCREMENT,
+  `text`             MEDIUMTEXT NOT NULL,
+  `userId`           BIGINT     NOT NULL,
+  `userCreate`       TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted`          BOOLEAN    NOT NULL DEFAULT FALSE,
+  `feedbackStatuIid` BIGINT     NOT NULL,
   PRIMARY KEY (`idfeedback`),
   INDEX `fk_feedback_user1_idx` (`userId` ASC),
   INDEX `fk_feedback_feedback_status1_idx` (`feedbackStatuIid` ASC),
   CONSTRAINT `fk_feedback_user1`
-    FOREIGN KEY (`userId`)
-    REFERENCES `baglab`.`user` (`idUser`)
+  FOREIGN KEY (`userId`)
+  REFERENCES `baglab`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_feedback_feedback_status1`
-    FOREIGN KEY (`feedbackStatuIid`)
-    REFERENCES `baglab`.`feedback_status` (`idfeedback_status`)
+  FOREIGN KEY (`feedbackStatuIid`)
+  REFERENCES `baglab`.`feedback_status` (`idfeedback_status`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION
+)
+  ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
--- Table `baglab`.`model_price`
+-- Table `baglab`.`bag_type_price`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `baglab`.`bag_type_price`;
+CREATE TABLE `bag_type_price` (
+  `idbag_type_price` BIGINT    NOT NULL AUTO_INCREMENT,
+  `bag_type_id`      BIGINT   NOT NULL,
+  `date`             TIMESTAMP NULL     DEFAULT NULL,
+  `price`            INT(11)            DEFAULT NULL,
+  PRIMARY KEY (`idbag_type_price`),
+  CONSTRAINT `bag_type_id`
+  FOREIGN KEY (`bag_type_id`)
+  REFERENCES `baglab`.`bag_type` (`idBagType`)
+)
+  ENGINE = InnoDB;
 
-/*
-create index model_price_modelId_date_index
-  on model_price (modelId, date DESC)
-;*/
+-- -----------------------------------------------------
+-- Table `baglab`.`material_price`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `baglab`.`material_price`;
+CREATE TABLE `baglab`.`material_price` (
+  `idmaterial_price` BIGINT    NOT NULL AUTO_INCREMENT,
+  `materialId`       BIGINT       NOT NULL,
+  `price`            INT       NULL,
+  `date`             TIMESTAMP NULL,
+  PRIMARY KEY (`idmaterial_price`),
+  CONSTRAINT `materialId`
+  FOREIGN KEY (`materialId`)
+  REFERENCES `baglab`.`material` (`idmaterial`))
+    ENGINE = InnoDB;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+SET SQL_MODE = @OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
 
