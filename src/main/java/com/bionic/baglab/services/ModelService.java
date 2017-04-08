@@ -26,4 +26,6 @@ public class ModelService {
     public List<ModelEntity> findAllModelsbyUserId (long id){
         return modelDao.findAllModelsbyUserId(id);
     }
+
+    public void save(ModelEntity model) { modelDao.save(model);    }
 }

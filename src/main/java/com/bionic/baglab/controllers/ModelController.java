@@ -26,12 +26,18 @@ public class ModelController {
     @Autowired
     private ModelService modelService;
 
-//   @RequestMapping(value = "/{modelId}/delete", method = RequestMethod.POST)
-//    public ResponseEntity<?> delete(@PathVariable("modelId") long modelId) {
-//        ModelEntity model = modelDao.findOne(modelId);
-//        model.setDeleted(true);
-//        modelDao.save(model);
-//        return ResponseEntity.noContent().build();
+   @RequestMapping(value = "/{modelId}/delete", method = RequestMethod.GET) //TODO change to POST method
+    public ResponseEntity<?> delete(@PathVariable("modelId") long modelId) {
+       ModelEntity model = modelService.findOne(modelId);
+       model.setDeleted(true);
+       modelService.save(model);
+       return ResponseEntity.noContent().build();
+   }
+
+   @RequestMapping(value = "/{modelId}/save", method = RequestMethod.GET) //TODO change to POST method
+   public void saveModel (ModelEntity newModel) {
+       modelService.save(newModel);
+   }
 
     @RequestMapping(value = "/{userId}/models", method = RequestMethod.GET)
     @ResponseBody
