@@ -12,8 +12,11 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "models", path = "models")
 public interface ModelDao extends CrudRepository<ModelEntity, Long> {
 
-    @Query("select e from ModelEntity e where e.deleted = false")
-    List<ModelEntity> findExistent();
+//    @Query("select e from ModelEntity e where e.deleted = false")
+//    List<ModelEntity> findExistent();
+
+    @Query("select model from ModelEntity model where model.user.idUser = :id")
+    List<ModelEntity> findAllModelsbyUserId (@Param ("id") long userId);
 
 
 }

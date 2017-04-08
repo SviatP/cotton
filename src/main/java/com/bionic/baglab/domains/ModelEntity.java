@@ -15,7 +15,7 @@ import static java.util.Comparator.comparing;
  * Created by potaychuk on 29.03.2017.
  */
 @Entity
-@Table(name = "model", schema = "baglab")
+@Table(name = "[model]", schema = "baglab")
 public class ModelEntity {
     private long idModel;
     private Timestamp modelCreate;
@@ -26,7 +26,7 @@ public class ModelEntity {
     private int price;
 
     @Id
-    @Column(name = "idModel", columnDefinition = "INT(11)")
+    @Column(name = "[idModel]", columnDefinition = "INT(11)")
     public long getIdModel() {
         return idModel;
     }
@@ -36,7 +36,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "modelCreate")
+    @Column(name = "[modelCreate]")
     public Timestamp getModelCreate() {
         return modelCreate;
     }
@@ -46,7 +46,7 @@ public class ModelEntity {
     }
 
     @Basic
-    @Column(name = "modelUpdate")
+    @Column(name = "[modelUpdate]")
     public Timestamp getModelUpdate() {
         return modelUpdate;
     }
@@ -66,7 +66,7 @@ public class ModelEntity {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", columnDefinition = "INT(11)")
+    @JoinColumn(name = "[userId]", columnDefinition = "INT(11)")
     public UserEntity getUser() {
         return user;
     }
@@ -97,21 +97,6 @@ public class ModelEntity {
         this.price = price;
     }
 
-    //    @OneToMany(mappedBy = "modelId", cascade = CascadeType.ALL)
-//    public List<ModelPriceEntity> getPriceEntities() {
-//        return priceEntities;
-//    }
-//
-//    public void setPriceEntities(List<ModelPriceEntity> priceEntities) {
-//        this.priceEntities = priceEntities;
-//    }
-//
-//    @Transient
-//    public Integer getPrice() {
-//        return !priceEntities.isEmpty()
-//                ? priceEntities.get(priceEntities.size()-1).getPrice()
-//                : null;
-//    }
 
     @Override
     public boolean equals(Object o) {
