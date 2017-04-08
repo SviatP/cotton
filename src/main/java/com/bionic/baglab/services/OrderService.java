@@ -2,7 +2,9 @@ package com.bionic.baglab.services;
 
 import com.bionic.baglab.dao.OrderDao;
 import com.bionic.baglab.dao.OrderStatusDao;
+import com.bionic.baglab.domains.ModelEntity;
 import com.bionic.baglab.domains.OrderEntity;
+import com.bionic.baglab.dto.ModelDto;
 import com.bionic.baglab.dto.OrderDto;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,18 @@ public class OrderService {
         return temp.stream().map(OrderDto::new).collect(Collectors.toSet());
     }
 
+    public Set<ModelDto> findOrderModels(long id){
+        OrderEntity oe = orderDao.findOne(id);
+        return oe.getModels().stream().map(ModelDto::new).collect(Collectors.toSet());
+    }
+
     public OrderEntity findOne(Long id){
         return orderDao.findOne(id);
+    }
+
+
+    public OrderDto getOrderDtoById(Long id){
+        return new OrderDto(orderDao.findOne(id));
     }
 
     @Transactional
