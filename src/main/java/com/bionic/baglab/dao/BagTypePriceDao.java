@@ -1,5 +1,6 @@
 package com.bionic.baglab.dao;
 
+import com.bionic.baglab.domains.BagTypeEntity;
 import com.bionic.baglab.domains.BagTypePriceEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

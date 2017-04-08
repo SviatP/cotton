@@ -44,7 +44,6 @@ DROP TABLE IF EXISTS `baglab`.`material`;
 CREATE TABLE IF NOT EXISTS `baglab`.`material` (
   `idmaterial` BIGINT      NOT NULL AUTO_INCREMENT,
   `name`       VARCHAR(45) NOT NULL,
-  `price`      INT         NOT NULL,
   `deleted`    BOOLEAN     NOT NULL DEFAULT FALSE,
   INDEX `idmaterial` (`idmaterial` ASC),
   PRIMARY KEY (`idmaterial`)
@@ -365,21 +364,6 @@ CREATE TABLE IF NOT EXISTS `baglab`.`feedback` (
 )
   ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `baglab`.`model_price`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `baglab`.`model_price`;
-CREATE TABLE `model_price` (
-  `idmodel_price` BIGINT    NOT NULL AUTO_INCREMENT,
-  `modelId`       BIGINT   NOT NULL,
-  `date`          TIMESTAMP NULL     DEFAULT NULL,
-  `price`         INT(11)            DEFAULT NULL,
-  PRIMARY KEY (`idmodel_price`),
-  CONSTRAINT `modelId`
-  FOREIGN KEY (`idmodel_price`)
-  REFERENCES `baglab`.`model` (`idModel`)
-)
-  ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `baglab`.`bag_type_price`
@@ -408,7 +392,7 @@ CREATE TABLE `baglab`.`material_price` (
   `date`             TIMESTAMP NULL,
   PRIMARY KEY (`idmaterial_price`),
   CONSTRAINT `materialId`
-  FOREIGN KEY (`idmaterial_price`)
+  FOREIGN KEY (`materialId`)
   REFERENCES `baglab`.`material` (`idmaterial`))
     ENGINE = InnoDB;
 

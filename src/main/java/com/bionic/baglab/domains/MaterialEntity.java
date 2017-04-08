@@ -1,6 +1,9 @@
 package com.bionic.baglab.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by nicot on 4/2/2017.
@@ -10,9 +13,8 @@ import javax.persistence.*;
 public class MaterialEntity {
     private long idmaterial;
     private String name;
-    private int price;
     private byte deleted;
-
+private List<MaterialPriceEntity> prices;
     @Id
     @Column(name = "idmaterial")
     public long getIdmaterial() {
@@ -34,16 +36,6 @@ public class MaterialEntity {
     }
 
     @Basic
-    @Column(name = "price")
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    @Basic
     @Column(name = "deleted", columnDefinition = "BitTypeDescriptor")
     public byte getDeleted() {
         return deleted;
@@ -51,6 +43,24 @@ public class MaterialEntity {
 
     public void setDeleted(byte deleted) {
         this.deleted = deleted;
+    }
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "materialId")
+    @JsonIgnore
+    public List<MaterialPriceEntity> getPriceEntities() {
+        return prices;
+    }
+
+    public void setPriceEntities(List<MaterialPriceEntity> priceEntities) {
+        this.prices = priceEntities;
+    }
+
+    @Transient
+    public Integer getLastPrice() {
+        return !prices.isEmpty()
+                ? prices.get(prices.size() - 1).getPrice()
+                : -1;
     }
 
     @Override
@@ -61,7 +71,6 @@ public class MaterialEntity {
         MaterialEntity that = (MaterialEntity) o;
 
         if (idmaterial != that.idmaterial) return false;
-        if (price != that.price) return false;
         if (deleted != that.deleted) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
@@ -72,7 +81,6 @@ public class MaterialEntity {
     public int hashCode() {
         int result = (int) (idmaterial ^ (idmaterial >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + price;
         result = 31 * result + (int) deleted;
         return result;
     }

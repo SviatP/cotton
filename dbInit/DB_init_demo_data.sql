@@ -15,9 +15,9 @@ insert into baglab.orderStatus (code, description) values ('processing', 'order 
 insert into baglab.orderStatus (code, description) values ('denied', 'order is denied by moderator');
 insert into baglab.orderStatus (code, description) values ('send', 'order is shipped from factory');
 
-insert into baglab.material (name, price) values ('cotton', 202);
-insert into baglab.material (name, price) values ('jeans', 281);
-insert into baglab.material (name, price) values ('leather', 385);
+insert into baglab.material (name) values ('cotton');
+insert into baglab.material (name) values ('jeans');
+insert into baglab.material (name) values ('leather');
 
 
 INSERT INTO `baglab`.`bag_type` (`script`) VALUES ('<asd></asd>');
@@ -318,6 +318,11 @@ insert into baglab.bag_type_price(bag_type_id, date, price) values (1,NOW(), 778
 insert into baglab.bag_type_price(bag_type_id, date, price) values (2,NOW(), 778);
 insert into baglab.bag_type_price(bag_type_id, date, price) values (2,NOW(), 778);
 
+#-------------------------
+insert into baglab.material_price(materialId, date, price) values (1,NOW(), 1778);
+insert into baglab.material_price(materialId, date, price) values (3,NOW(), 2778);
+insert into baglab.material_price(materialId, date, price) values (1,NOW(), 3778);
+insert into baglab.material_price(materialId, date, price) values (2,NOW(), 4778);
 
 #-------------------------
 insert into baglab.pages_type (type) VALUES ('ACTIVE');

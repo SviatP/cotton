@@ -3,6 +3,7 @@ package com.bionic.baglab.domains;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,7 @@ import java.util.List;
 public class BagTypeEntity {
     private Long idBagType;
     private String script;
-    private List<BagTypePriceEntity> prices;
+    private List<BagTypePriceEntity> prices =new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,7 +46,6 @@ public class BagTypeEntity {
     }
 
     @Transient
-    //@JsonIgnore
     public Integer getLastPrice() {
         List<BagTypePriceEntity> prices = getPriceEntities();
         return !prices.isEmpty()
