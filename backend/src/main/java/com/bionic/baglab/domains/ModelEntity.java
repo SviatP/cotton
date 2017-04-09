@@ -20,7 +20,7 @@ public class ModelEntity {
     private long idModel;
     private Timestamp modelCreate;
     private Timestamp modelUpdate;
-//    private boolean deleted;
+    private boolean deleted;
     private UserEntity user;
     private Collection<OrderEntity> orders;
 //    private List<ModelPriceEntity> priceEntities;
@@ -55,15 +55,15 @@ public class ModelEntity {
         this.modelUpdate = modelUpdate;
     }
 
-//    @Basic
-//    @Column(name = "[deleted]")
-//    public boolean getDeleted() {
-//        return deleted;
-//    }
-//
-//    public void setDeleted(boolean deleted) {
-//        this.deleted = deleted;
-//    }
+    @Basic
+    @Column(name = "[deleted]")
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "[userId]", columnDefinition = "INT(11)")
@@ -77,8 +77,8 @@ public class ModelEntity {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "models_order", catalog = "baglab", joinColumns = {
-            @JoinColumn(name = "modelId") },inverseJoinColumns = {
-            @JoinColumn(name = "orderId") })
+            @JoinColumn(name = "modelId")}, inverseJoinColumns = {
+            @JoinColumn(name = "orderId")})
     public Collection<OrderEntity> getOrders() {
         return orders;
     }
@@ -123,6 +123,6 @@ public class ModelEntity {
         long result = idModel;
         result = 31 * result + (modelCreate != null ? modelCreate.hashCode() : 0);
         result = 31 * result + (modelUpdate != null ? modelUpdate.hashCode() : 0);
-        return (int)result;
+        return (int) result;
     }
 }
